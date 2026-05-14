@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Routes configuration.
  *
@@ -29,6 +30,7 @@ use Cake\Routing\RouteBuilder;
  * So you can use `$this` to reference the application class instance
  * if required.
  */
+
 return function (RouteBuilder $routes): void {
     /*
      * The default class to use for all routes
@@ -61,6 +63,12 @@ return function (RouteBuilder $routes): void {
          * ...and connect the rest of 'Pages' controller's URLs.
          */
         $builder->connect('/pages/*', 'Pages::display');
+
+        // Habilita que a nossa API responda no formato JSON
+        $builder->setExtensions(['json']);
+
+        // Cria automaticamente todas as rotas RESTful para os usuários
+        $builder->resources('Users');
 
         /*
          * Connect catchall routes for all controllers.

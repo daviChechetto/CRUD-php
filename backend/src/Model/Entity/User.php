@@ -11,10 +11,10 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $name
  * @property string $username
- * @property int $password
+ * @property string $password
  * @property \Cake\I18n\Date $created
  * @property \Cake\I18n\Date $modified
- * @property \Cake\I18n\Date $modified_by
+ * @property \Cake\I18n\Date|null $modified_by
  * @property bool $status
  */
 class User extends Entity

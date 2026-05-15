@@ -56,30 +56,25 @@ class UsersTable extends Table
     {
         $validator
             ->scalar('name')
-            ->maxLength('name', 250)
+            ->maxLength('name', 255)
             ->requirePresence('name', 'create')
             ->notEmptyString('name');
 
         $validator
             ->scalar('username')
-            ->maxLength('username', 250)
+            ->maxLength('username', 255)
             ->requirePresence('username', 'create')
             ->notEmptyString('username');
 
         $validator
-            ->integer('password')
+            ->scalar('password')
+            ->maxLength('password', 255)
             ->requirePresence('password', 'create')
             ->notEmptyString('password');
 
         $validator
-            ->date('modified')
-            ->requirePresence('modified', 'create')
-            ->notEmptyDate('modified');
-
-        $validator
             ->date('modified_by')
-            ->requirePresence('modified_by', 'create')
-            ->notEmptyDate('modified_by');
+            ->allowEmptyDate('modified_by');
 
         $validator
             ->boolean('status')

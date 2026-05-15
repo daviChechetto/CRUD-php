@@ -73,8 +73,8 @@ class UsersTable extends Table
             ->notEmptyString('password');
 
         $validator
-            ->date('modified_by')
-            ->allowEmptyDate('modified_by');
+            ->dateTime('modified_by')
+            ->allowEmptyDateTime('modified_by');
 
         $validator
             ->boolean('status')

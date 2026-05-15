@@ -23,6 +23,18 @@ class UsersController extends AppController
         $this->viewBuilder()->setClassName('Json');
         $this->viewBuilder()->setOption('serialize', 'users');
     }
+    public function view($id = null)
+    {
+        // 1. Busca o usuário com o id especificado
+        $user = $this->Users->get($id);
+
+        // 2. Envia a variável para a camada de visualização
+        $this->set(compact('user'));
+
+        // 3. Diz ao CakePHP para transformar a variável 'user' em JSON
+        $this->viewBuilder()->setClassName('Json');
+        $this->viewBuilder()->setOption('serialize', 'user');
+    }
     public function add()
     {
         // 1. Cria uma entidade vazia (representa uma nova linha no banco)
@@ -35,12 +47,46 @@ class UsersController extends AppController
         if ($this->Users->save($user)) {
             $status = 'sucesso';
         } else {
-            $status = 'erro';
+            $status = 'erro ao salvar usuário ' . $user->name;
         }
 
         // 4. Prepara a resposta em JSON
         $this->set(compact('user', 'status'));
         $this->viewBuilder()->setClassName('Json');
         $this->viewBuilder()->setOption('serialize', ['user', 'status']);
+    }
+    public function edit($id = null)
+    {
+        $user = $this->Users->get($id);
+
+        $user = $this->Users->patchEntity($user, $this->request->getData());
+
+        if ($this->Users->save($user)) {
+            $status = 'Usuário ' . $user->name . ' atualizado com sucesso!';
+        } else {
+            $status = 'erro ao atualizar usuário ' . $user->name;
+        }
+
+        // 4. Prepara a resposta em JSON
+        $this->set(compact('user', 'status'));
+        $this->viewBuilder()->setClassName('Json');
+        $this->viewBuilder()->setOption('serialize', ['user', 'status']);
+    }
+    public function delete($id = null)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+
+        $user = $this->Users->get($id);
+
+        if ($this->Users->delete($user)) {
+            $status = 'Usuário ' . $user->name . ' deletado com sucesso!';
+        } else {
+            $status = 'erro ao deletar usuário ' . $user->name;
+        }
+
+        // 4. Prepara a resposta em JSON
+        $this->set(compact('status'));
+        $this->viewBuilder()->setClassName('Json');
+        $this->viewBuilder()->setOption('serialize', 'status');
     }
 }

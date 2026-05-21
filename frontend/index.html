@@ -16,29 +16,40 @@
 	<h1>Gerenciamento de Usuários</h1>
 
 	<div class="container-formulario">
-		<h2 id="formTitle">Cadastrar Usuário</h2>
+		<h2 class="titulo-formulario">Cadastrar Usuário</h2>
 		<form id="userForm">
 			<input type="hidden" id="userId">
 
 			<div class="form-group">
-				<input type="text" id="name" class="input" required>
+				<input type="text" id="name" class="campo-texto" required>
 				<label for="name" class="user-label">Nome:</label>
 			</div>
 			<div class="form-group">
-				<input type="email" id="username" class="input" required>
+				<input type="email" id="username" class="campo-texto" required>
 				<label for="username" class="user-label">E-mail (username):</label>
 			</div>
 			<div class="form-group">
-				<input type="password" id="password" class="input" required>
+				<input type="password" id="password" class="campo-texto" required>
 				<label for="password" class="user-label">Senha:</label>
 			</div>
 			<div class="form-group">
-				<input type="number" id="status" class="input" value="1" min="0" max="1" required>
-				<label for="status" class="user-label">Status (1 ou 0):</label>
+				<div class="toggle-container">
+					<input id="check" type="checkbox" />
+					<label class="switch" for="check">
+						<svg viewBox="0 0 212.4992 84.4688" overflow="visible">
+							<path pathLength="360" fill="none" stroke="currentColor"
+								d="M 42.2496 0 A 42.24 42.24 90 0 0 0 42.2496 A 42.24 42.24 90 0 0 42.2496 84.4688 A 42.24 42.24 90 0 0 84.4992 42.2496 A 42.24 42.24 90 0 0 42.2496 0 A 42.24 42.24 90 0 0 0 42.2496 A 42.24 42.24 90 0 0 42.2496 84.4688 L 170.2496 84.4688 A 42.24 42.24 90 0 0 212.4992 42.2496 A 42.24 42.24 90 0 0 170.2496 0 A 42.24 42.24 90 0 0 128 42.2496 A 42.24 42.24 90 0 0 170.2496 84.4688 A 42.24 42.24 90 0 0 212.4992 42.2496 A 42.24 42.24 90 0 0 170.2496 0 L 42.2496 0">
+							</path>
+							<path pathLength="360" style="scale: 1 -1;" fill="none" stroke="currentColor"
+								d="M 42.2496 0 A 42.24 42.24 90 0 0 0 42.2496 A 42.24 42.24 90 0 0 42.2496 84.4688 A 42.24 42.24 90 0 0 84.4992 42.2496 A 42.24 42.24 90 0 0 42.2496 0 A 42.24 42.24 90 0 0 0 42.2496 A 42.24 42.24 90 0 0 42.2496 84.4688 L 170.2496 84.4688 A 42.24 42.24 90 0 0 212.4992 42.2496 A 42.24 42.24 90 0 0 170.2496 0 A 42.24 42.24 90 0 0 128 42.2496 A 42.24 42.24 90 0 0 170.2496 84.4688 A 42.24 42.24 90 0 0 212.4992 42.2496 A 42.24 42.24 90 0 0 170.2496 0 L 42.2496 0">
+							</path>
+						</svg>
+					</label>
+				</div>
 			</div>
 
 			<!-- From Uiverse.io by Peary74 -->
-			<button type="submit" id="btnSave">
+			<button type="submit" id="botaoSalvar">
 				<div class="svg-wrapper-1">
 					<div class="svg-wrapper">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" class="icon">
@@ -69,6 +80,19 @@
 		<tbody id="tableBody">
 		</tbody>
 	</table>
+
+	<!-- From Uiverse.io by andrew-demchenk0 -->
+	<button id="botaoRefresh" type="button" class="button">
+		<span class="button__text">Refresh</span>
+		<span class="button__icon">
+			<svg class="svg" height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg">
+				<path
+					d="M35.3 12.7c-2.89-2.9-6.88-4.7-11.3-4.7-8.84 0-15.98 7.16-15.98 16s7.14 16 15.98 16c7.45 0 13.69-5.1 15.46-12h-4.16c-1.65 4.66-6.07 8-11.3 8-6.63 0-12-5.37-12-12s5.37-12 12-12c3.31 0 6.28 1.38 8.45 3.55l-6.45 6.45h14v-14l-4.7 4.7z">
+				</path>
+				<path d="M0 0h48v48h-48z" fill="none"></path>
+			</svg>
+		</span>
+	</button>
 
 </body>
 

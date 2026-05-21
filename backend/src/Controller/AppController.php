@@ -49,4 +49,15 @@ class AppController extends Controller
          */
         //$this->loadComponent('FormProtection');
     }
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        
+        // Libera o CORS para a nossa API
+        $this->response = $this->response->cors($this->request)
+            ->allowOrigin(['*']) // Permite qualquer frontend (como o seu Live Server)
+            ->allowMethods(['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'])
+            ->allowHeaders(['X-Requested-With', 'Content-Type', 'Accept', 'Origin', 'Authorization'])
+            ->build();
+    }
 }

@@ -94,25 +94,6 @@
 	margin: 0;
 }
 
-.status-badge {
-	display: inline-block;
-	padding: 6px 12px;
-	border-radius: 16px;
-	font-size: 12px;
-	font-weight: 600;
-	width: fit-content;
-}
-
-.status-ativo {
-	background-color: #203d22;
-	color: var(--status-ativo);
-}
-
-.status-inativo {
-	background-color: #f0f0f0;
-	color: var(--status-inativo);
-}
-
 .action-buttons {
 	display: flex;
 	gap: 12px;

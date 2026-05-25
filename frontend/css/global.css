@@ -7,11 +7,15 @@
 	--cor-fundo: #0F0F0F;
 	--cor-fundo-contraste: #1F1F1F;
 
+	--cor-status-ativo: #c3f0c4;
+	--cor-status-inativo: #999999;
+
 	cursor: url(../img/cursor.svg), default !important;
 
-	a:hover, button:hover{
-        cursor: url(../img/cursor-hover.svg) 12 10, pointer !important;
-    }
+	a:hover,
+	button:hover {
+		cursor: url(../img/cursor-hover.svg) 12 10, pointer !important;
+	}
 }
 
 body {
@@ -41,20 +45,12 @@ h2 {
 
 .container-formulario {
 	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	top: 0%;
+	left: 0%;
 	z-index: 5;
 
 	pointer-events: none;
 	opacity: 0;
-
-	background: var(--cor-fundo-contraste);
-	padding: 15px;
-	background: linear-gradient(#212121, #212121) padding-box,
-		linear-gradient(145deg, transparent 35%, #b1b1b1, #ffffff) border-box;
-	border: 2px solid transparent;
-	border-radius: 30px;
 
 	width: 400px;
 	transition: 150ms ease-out;
@@ -67,20 +63,36 @@ h2 {
 	&::before {
 		content: "";
 		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
 		z-index: -1;
 
 		width: 100vw;
 		height: 100vh;
 
 		background-color: rgba(0, 0, 0, 0.5);
+		backdrop-filter: blur(5px);
 	}
 
 	.titulo-formulario {
 		margin-top: 0;
 		font-weight: 300;
+	}
+
+	#userForm {
+		position: absolute;
+		top: 50vh;
+		left: 50vw;
+		z-index: 5;
+		transform: translate(-50%, -50%);
+
+		background: var(--cor-fundo-contraste);
+		padding: 15px;
+		background: linear-gradient(#212121, #212121) padding-box,
+			linear-gradient(145deg, transparent 35%, #b1b1b1, #ffffff) border-box;
+		border: 2px solid transparent;
+		border-radius: 30px;
+
+		width: 400px;
+		transition: 150ms ease-out;
 	}
 }
 
@@ -120,6 +132,10 @@ h2 {
 
 		&:nth-child(even) {
 			background-color: var(--cor-fundo-contraste);
+
+			.status-inativo {
+				background-color: var(--cor-fundo);
+			}
 		}
 
 		&:hover {
@@ -134,6 +150,25 @@ h2 {
 			color: var(--cor-secundaria);
 		}
 	}
+}
+
+.status-badge {
+	display: inline-block;
+	padding: 6px 12px;
+	border-radius: 16px;
+	font-size: 12px;
+	font-weight: 600;
+	width: fit-content;
+}
+
+.status-ativo {
+	background-color: #203d22;
+	color: var(--cor-status-ativo);
+}
+
+.status-inativo {
+	background-color: var(--cor-fundo-contraste);
+	color: var(--cor-status-inativo);
 }
 
 .form-group {
@@ -185,6 +220,7 @@ h2 {
 
 /* From Uiverse.io by Peary74 */
 #botaoSalvar {
+	position: relative;
 	font-family: 'Nothing You Could Do', cursive;
 	font-weight: 1000;
 	font-size: 20px;
@@ -196,7 +232,6 @@ h2 {
 	background: #131313;
 	fill: rgb(155, 153, 153);
 
-	margin-left: auto;
 	padding: 0.7em 1em;
 	padding-left: 0.9em;
 
@@ -215,7 +250,7 @@ h2 {
 	svg {
 		display: block;
 		transform-origin: center center;
-		transition: transform 0.3s ease-in-out;
+		transition: 0.3s ease-in-out;
 	}
 
 	&:hover {
@@ -227,7 +262,7 @@ h2 {
 		}
 
 		svg {
-			transform: translateX(1.2em) scale(1.1);
+			transform: translateX(1.5em) scale(1.1);
 			fill: #fff;
 		}
 
@@ -1196,17 +1231,20 @@ h2 {
 
 	width: 20px;
 	height: 20px;
-	border: 1px solid #dfdfdf; /* Uma cor vibrante */
+	border: 1px solid #dfdfdf;
+	/* Uma cor vibrante */
 	border-radius: 50px;
-	pointer-events: none; /* Essencial para não travar o mouse */
+	pointer-events: none;
+	/* Essencial para não travar o mouse */
 
-    /* transform: translate(50%, 50%); */
+	/* transform: translate(50%, 50%); */
 
-	transition:  250ms ease-out; /* Suaviza o movimento */
+	transition: 250ms ease-out;
+	/* Suaviza o movimento */
 
-    &.esconder{
-        width: 10px;
-        height: 10px;
-        opacity: 0;
-    }
+	&.esconder {
+		width: 10px;
+		height: 10px;
+		opacity: 0;
+	}
 }

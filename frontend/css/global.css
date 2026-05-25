@@ -1,8 +1,8 @@
 /* CSS básico para organizar a tela */
 
 :root {
-	--primary-color: #4CAF50;
-	--secondary-color: #f9f9f9;
+	--cor-primaria: #4CAF50;
+	--cor-secundaria: #f9f9f9;
 
 	--cor-fundo: #0F0F0F;
 	--cor-fundo-contraste: #1F1F1F;
@@ -16,7 +16,7 @@
 
 body {
 	font-family: "Noto Sans", sans-serif;
-	color: var(--secondary-color);
+	color: var(--cor-secundaria);
 
 	margin: 0;
 
@@ -131,7 +131,7 @@ h2 {
 			align-items: center;
 			gap: 10px;
 
-			color: var(--secondary-color);
+			color: var(--cor-secundaria);
 		}
 	}
 }
@@ -252,7 +252,7 @@ h2 {
 	align-items: center;
 	margin: 20px auto;
 	border: 2px solid var(--cor-fundo-contraste);
-	box-shadow: 4px 4px var(--secondary-color);
+	box-shadow: 4px 4px var(--cor-secundaria);
 	background-color: var(--cor-fundo-contraste);
 	border-radius: 10px;
 	overflow: hidden;
@@ -265,7 +265,7 @@ h2 {
 
 	.button__text {
 		transform: translateX(33px);
-		color: var(--secondary-color);
+		color: var(--cor-secundaria);
 		font-weight: 600;
 	}
 
@@ -282,7 +282,7 @@ h2 {
 
 	.svg {
 		width: 20px;
-		fill: var(--secondary-color);
+		fill: var(--cor-secundaria);
 	}
 
 	&:hover {
@@ -300,12 +300,9 @@ h2 {
 
 	&:active {
 		transform: translate(3px, 3px);
-		box-shadow: 0px 0px var(--secondary-color);
+		box-shadow: 0px 0px var(--cor-secundaria);
 	}
 }
-
-
-
 
 /* Toggle Switch */
 
@@ -341,7 +338,7 @@ h2 {
 			display: block;
 
 			font-size: 0.875em;
-			color: var(--secondary-color);
+			color: var(--cor-secundaria);
 			opacity: 1;
 			transition: opacity var(--a);
 		}
@@ -367,7 +364,7 @@ h2 {
 	}
 
 	.switch svg path {
-		color: var(--secondary-color);
+		color: var(--cor-secundaria);
 		stroke-width: 16;
 		stroke-linecap: round;
 		stroke-linejoin: round;

@@ -59,5 +59,12 @@ class AppController extends Controller
             ->allowMethods(['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'])
             ->allowHeaders(['X-Requested-With', 'Content-Type', 'Accept', 'Origin', 'Authorization'])
             ->build();
+
+        //Intercepta o "preflight" do navegador
+        if ($this->request->is('options')) {
+            // Se for OPTIONS, devolve a resposta na hora (com os cabeçalhos liberados) 
+            // e impede o CakePHP de continuar procurando rotas e dar erro.
+            return $this->response;
+        }
     }
 }

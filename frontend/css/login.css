@@ -1,0 +1,160 @@
+body {
+	height: 100vh;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+.container-login {
+	display: flex;
+	justify-content: end;
+	align-items: center;
+	height: 100%;
+
+	background-image: url('../assets/mirante.png');
+	background-size: cover;
+	background-position: center;
+
+	box-sizing: border-box;
+	border-radius: 410px;
+	padding: 10px;
+
+	#loginForm {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		background-color: #0f0f0f75;
+		backdrop-filter: blur(10px);
+
+		padding: 20px;
+		border-radius: 0px 400px 400px 0px; 
+
+		height: 100%;
+		width: 50%;
+		box-sizing: border-box;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	}
+}
+
+.container-logo {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translate(-50%, -50%);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background-color: var(--cor-fundo); 
+	box-shadow: 0 0 0px 2px rgb(255, 255, 255), 0px 0px 5px 0px rgb(0 0 0 / 40%);
+
+	border-radius: 50%;
+	aspect-ratio: 1 / 1;
+	clip-path: circle(50%);
+
+	width: 150px;
+}
+
+.logo {
+	object-fit: contain;
+
+	height: 100%;
+}
+
+.campo-texto:focus~label,
+.campo-texto:valid~label {
+	background-color: #212121;
+	border-radius: 10px;
+	padding: 2px 10px;
+	color: var(--cor-primaria);
+}
+
+.animated-button {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	padding: 16px 36px;
+	border: 4px solid;
+	border-color: transparent;
+	font-size: 16px;
+	background-color: inherit;
+	border-radius: 100px;
+	font-weight: 600;
+	color: var(--cor-primaria);
+	box-shadow: 0 0 0 2px var(--cor-primaria);
+	cursor: pointer;
+	overflow: hidden;
+	transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+
+	svg {
+		position: absolute;
+		width: 24px;
+		fill: var(--cor-primaria);
+		z-index: 9;
+		transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+	}
+
+	.arr-1 {
+		right: 16px;
+	}
+
+	.arr-2 {
+		left: -25%;
+	}
+
+	.circle {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 20px;
+		height: 20px;
+		background-color: var(--cor-primaria);
+		border-radius: 50%;
+		opacity: 0;
+		transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+	}
+
+	.text {
+		position: relative;
+		z-index: 1;
+		transform: translateX(-12px);
+		transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+	}
+
+	&:hover {
+		box-shadow: 0 0 0 12px transparent;
+		color: #212121;
+		border-radius: 12px;
+
+		.arr-1 {
+			right: -25%;
+		}
+
+		.arr-2 {
+			left: 16px;
+		}
+
+		.text {
+			transform: translateX(12px);
+		}
+
+		svg {
+			fill: #212121;
+		}
+
+		.circle {
+			width: 220px;
+			height: 220px;
+			opacity: 1;
+		}
+	}
+
+	&:active {
+		scale: 0.95;
+		box-shadow: 0 0 0 4px var(--cor-primaria);
+	}
+}

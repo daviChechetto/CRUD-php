@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD de Usuários</title>
+
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/login.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/global.js" defer></script>
+    <script src="js/login.js" defer></script>
+</head>
+
+<body>
+    <section class="container-login">
+
+        <form id="loginForm">
+            <h2>Login</h2>
+            <div class="form-group">
+                <input type="email" id="email" class="campo-texto" required autocomplete="email">
+                <label for="email" class="user-label">E-mail:</label>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" class="campo-texto" required autocomplete="current-password">
+                <label for="password" class="user-label">Senha:</label>
+            </div>
+            <button id="botaoEntrar" class="animated-button" type="submit">
+                <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                    </path>
+                </svg>
+                <span class="text">Entrar</span>
+                <span class="circle"></span>
+                <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
+                    </path>
+                </svg>
+            </button>
+
+            <div class="container-logo">
+                <img src="assets/logo.webp" class="logo" alt="Logo">
+            </div>
+        </form>
+    </section>
+</body>
+
+</html>

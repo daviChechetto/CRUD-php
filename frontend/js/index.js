@@ -18,14 +18,15 @@ function closeModal() {
 	}
 }
 
+
 function refresh() {
-	$.get(apiUrl, function (data) {
+	$.get(CONFIG.apiUrl, function (data) {
 		UI.corpoTabela.empty().append(data.map(user => `
 			<a href="view.html?id=${user.id}" class="user-item">
 				<div>${user.id}</div>
 				<div>${user.name}</div>
 				<div>${user.username}</div>
-				<div>${user.status}</div>
+				<div class="status-badge ${user.status === true ? 'status-ativo' : 'status-inativo'}">${user.status === true ? 'Ativo' : 'Inativo'}</div>
 			</a>
 		`).join(''));
 	}).fail(function () {
@@ -106,6 +107,24 @@ function refresh() {
 	});
 }
 
+function cadastrarUsuario(userData) {
+	$.ajax({
+		url: CONFIG.apiUrl,
+		type: "POST",
+		contentType: "application/json",
+		data: JSON.stringify(userData),
+		success: function (response) {
+			console.log("usuário cadastrado com sucesso!", response);
+			refresh(); // Atualiza a lista de usuários
+			closeModal(); // Fecha o modal de cadastro			
+		},
+		error: function (error) {
+			alert("Ocorreu um erro ao cadastrar o usuário. Por favor, verifique o console.");
+			console.error("Erro ao cadastrar usuário:", error.responseText);
+		}
+	});
+}
+
 UI.botaoRefresh.on('click', function () {
 	refresh();
 });
@@ -124,31 +143,16 @@ UI.botaoSalvar.on('click', function (e) {
 
 	// 1. Capturamos os valores dos campos
 	const userId = $('#userId').val(); // Vai nos ajudar depois na hora de fazer a Edição
-	
+
 	const userData = {
-		name: $('#name').val(),
-		username: $('#username').val(),
-		password: $('#password').val(),
+		name: $("#nome").val(),
+		username: $("#apelido").val(),
+		password: $("#senha").val(),
 		// O checkbox retorna true ou false. Usamos um if ternário (?) para transformar em 1 ou 0
-		status: $('#check').prop('checked') ? 1 : 0 
+		status: $('#check').prop('checked') ? false : true
 	};
-
-	$.ajax({
-		url: apiUrl,
-		type: "POST",
-		contentType: "application/json",
-		data: JSON.stringify(userData),
-		success: function (response) {
-			console.log("usuário cadastrado com sucesso!", response);
-			refresh(); // Atualiza a lista de usuários
-			closeModal(); // Fecha o modal de cadastro			
-		},
-		error: function (error) {
-			alert("Ocorreu um erro ao cadastrar o usuário. Por favor, verifique o console.");
-			console.error("Erro ao cadastrar usuário:", error.responseText);
-		}
-	})
-
+	
+	cadastrarUsuario(userData);
 });
 
 UI.botaoCancelar.on('click', function () {
@@ -164,7 +168,6 @@ $(document).on('click', function (e) {
 		closeModal();
 	}
 });
-
 
 function init() {
 	refresh();

@@ -1,4 +1,4 @@
-const IU = {
+const UI = {
 	avatar: $("#avatar"),
 	nomeUsuario: $("#nomeUsuario"),
 	distintivoStatus: $("#distintivo-status"),
@@ -27,7 +27,7 @@ function buscarUsuarioPorId(idUsuario) {
 
 function atualizarUsuario(idUsuario, dados) {
 	return $.ajax({
-		url: 'http://localhost/crud/backend/users/' + idUsuario + '.json',
+		url: CONFIG.apiUrl + '/' + idUsuario + '.json',
 		type: "PUT",
 		contentType: 'application/json',
 		data: JSON.stringify(dados),
@@ -47,7 +47,7 @@ function atualizarUsuario(idUsuario, dados) {
 
 function mostrarMensagem(texto, tipo) {
 	const mensagem = $('<div class="mensagem ' + tipo + '">' + texto + '</div>');
-	IU.formularioEdicao.prepend(mensagem);
+	UI.formularioEdicao.prepend(mensagem);
 
 	setTimeout(function () {
 		mensagem.fadeOut(300, function () {
@@ -66,18 +66,18 @@ function preencherFormulario(usuario) {
 	const classePessoal = usuario.status === true ? 'ativo' : 'inativo';
 	const textoPessoal = usuario.status === true ? 'Ativo' : 'Inativo';
 
-	IU.avatar.text(inicial);
-	IU.nomeUsuario.text(usuario.name);
-	IU.distintivoStatus
+	UI.avatar.text(inicial);
+	UI.nomeUsuario.text(usuario.name);
+	UI.distintivoStatus
 		.text(textoPessoal)
 		.removeClass('ativo inativo')
 		.addClass(classePessoal);
 
-	IU.idUsuario.val(usuario.id);
-	IU.nomeUsuarioEntrada.val(usuario.name);
-	IU.emailUsuario.val(usuario.username);
-	IU.statusAlternancia.prop('checked', usuario.status === true);
-	IU.textoStatus.text(usuario.status === true ? 'Ativo' : 'Inativo');
+	UI.idUsuario.val(usuario.id);
+	UI.nomeUsuarioEntrada.val(usuario.name);
+	UI.emailUsuario.val(usuario.username);
+	UI.statusAlternancia.prop('checked', usuario.status === true);
+	UI.textoStatus.text(usuario.status === true ? 'Ativo' : 'Inativo');
 }
 
 function carregarEdicaoUsuario() {
@@ -93,34 +93,34 @@ function carregarEdicaoUsuario() {
 	});
 }
 
-IU.botaoVoltar.on('click', function (e) {
+UI.botaoVoltar.on('click', function (e) {
 	e.preventDefault();
 	window.history.back();
 });
 
 // Atualizar texto de status ao mudar o toggle
-IU.statusAlternancia.on('change', function () {
+UI.statusAlternancia.on('change', function () {
 	const novoTexto = $(this).is(':checked') ? 'Ativo' : 'Inativo';
-	IU.textoStatus.text(novoTexto);
+	UI.textoStatus.text(novoTexto);
 });
 
 // Salvar alterações
-IU.formularioEdicao.on('submit', function (evento) {
+UI.formularioEdicao.on('submit', function (evento) {
 	evento.preventDefault();
 
-	const idUsuario = IU.idUsuario.val();
+	const idUsuario = UI.idUsuario.val();
 	const dadosAtualizados = {
 		id: parseInt(idUsuario),
-		name: IU.nomeUsuarioEntrada.val(),
-		username: IU.emailUsuario.val(),
-		status: IU.statusAlternancia.is(':checked')
+		name: UI.nomeUsuarioEntrada.val(),
+		username: UI.emailUsuario.val(),
+		status: UI.statusAlternancia.is(':checked')
 	};
 
 	atualizarUsuario(idUsuario, dadosAtualizados);
 });
 
 // Cancelar edição
-IU.botaoCancelarEdicao.on('click', function () {
+UI.botaoCancelarEdicao.on('click', function () {
 	const idUsuario = obterParametroConsulta('id');
 	if (idUsuario) {
 		window.location.href = 'view.html?id=' + idUsuario;

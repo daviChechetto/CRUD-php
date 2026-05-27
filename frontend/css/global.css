@@ -18,16 +18,39 @@
 	}
 }
 
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0px);
+	}
+}
+
+@keyframes aparecerConteudo {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
 body {
 	font-family: "Noto Sans", sans-serif;
 	color: var(--cor-secundaria);
 
 	margin: 0;
+	opacity: 0;
 
 	background: var(--cor-fundo);
 	/* Add your background pattern here */
 	background-image: url(//www.devmedia.com.br/view/img/grid-light.png?2);
 	background-attachment: fixed;
+
+	animation: aparecerConteudo 500ms ease-out forwards;
 }
 
 label {
@@ -137,6 +160,11 @@ h3 {
 		padding: 20px;
 		text-align: left;
 		transition: background-color 0.3s ease;
+		
+		opacity: 0;
+		transform: translateY(-10px);
+
+		animation: fadeIn 500ms ease-out forwards;
 
 		&:nth-child(even) {
 			background-color: var(--cor-fundo-contraste);

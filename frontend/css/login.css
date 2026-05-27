@@ -4,6 +4,26 @@ body {
 	box-sizing: border-box;
 }
 
+@keyframes piscarAnimacaoCima {
+	0% {
+		transform: translateY(-100%);
+	}
+
+	100% {
+		transform: translateY(-49%);
+	}
+}
+
+@keyframes piscarAnimacaoBaixo {
+	0% {
+		transform: translateY(100%);
+	}
+
+	100% {
+		transform: translateY(51%);
+	}
+}
+
 .container-login {
 	display: flex;
 	justify-content: end;
@@ -22,18 +42,23 @@ body {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		align-items: center;
 
 		background-color: #0f0f0f75;
 		backdrop-filter: blur(10px);
 
-		padding: 20px;
-		border-radius: 0px 400px 400px 0px; 
+		padding: 14%;
+		border-radius: 0px 400px 400px 0px;
 
 		height: 100%;
 		width: 50%;
 		box-sizing: border-box;
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+		.form-group {
+			width: 100%;
+			margin-bottom: 20px;
+
+		}
 	}
 }
 
@@ -47,28 +72,36 @@ body {
 	justify-content: center;
 	align-items: center;
 
-	background-color: var(--cor-fundo); 
+	background-color: var(--cor-fundo);
 	box-shadow: 0 0 0px 2px rgb(255, 255, 255), 0px 0px 5px 0px rgb(0 0 0 / 40%);
 
 	border-radius: 50%;
 	aspect-ratio: 1 / 1;
 	clip-path: circle(50%);
+	overflow: hidden;
 
 	width: 150px;
 }
 
 .logo {
 	object-fit: contain;
+	transition: 500ms;
 
 	height: 100%;
 }
 
 .campo-texto:focus~label,
 .campo-texto:valid~label {
-	background-color: #212121;
+	background-color: #503d31;
 	border-radius: 10px;
 	padding: 2px 10px;
 	color: var(--cor-primaria);
+}
+
+.rodape-formulario {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .animated-button {
@@ -111,7 +144,7 @@ body {
 		left: 50%;
 		transform: translate(-50%, -50%);
 		width: 20px;
-		height: 20px;
+		aspect-ratio: 1 / 1;
 		background-color: var(--cor-primaria);
 		border-radius: 50%;
 		opacity: 0;
@@ -147,8 +180,7 @@ body {
 		}
 
 		.circle {
-			width: 220px;
-			height: 220px;
+			width: 410px;
 			opacity: 1;
 		}
 	}
@@ -156,5 +188,140 @@ body {
 	&:active {
 		scale: 0.95;
 		box-shadow: 0 0 0 4px var(--cor-primaria);
+	}
+}
+
+.gl-checkbox {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.85rem;
+	cursor: pointer;
+	user-select: none;
+	font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+}
+
+.gl-checkbox__input {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+	pointer-events: none;
+}
+
+.gl-checkbox__box {
+	width: 22px;
+	height: 22px;
+	min-width: 22px;
+	border-radius: 7px;
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	overflow: hidden;
+	transition:
+		background 0.3s ease,
+		border-color 0.3s ease,
+		box-shadow 0.3s ease,
+		transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Ripple on check */
+.gl-checkbox__box::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(circle at center,
+			rgba(200, 240, 96, 0.35) 0%,
+			transparent 70%);
+	opacity: 0;
+	transform: scale(0);
+	transition:
+		opacity 0.3s ease,
+		transform 0.4s ease;
+}
+
+.gl-checkbox:hover .gl-checkbox__box {
+	border-color: rgba(200, 240, 96, 0.35);
+	transform: scale(1.06);
+}
+
+.gl-checkbox__input:checked~.gl-checkbox__box {
+	background: linear-gradient(135deg, #c8f060, #60f0b8);
+	border-color: transparent;
+	box-shadow:
+		0 0 0 3px rgba(200, 240, 96, 0.15),
+		0 4px 14px rgba(200, 240, 96, 0.3);
+	transform: scale(1.05);
+}
+
+.gl-checkbox__input:checked~.gl-checkbox__box::before {
+	opacity: 1;
+	transform: scale(1.5);
+}
+
+.gl-checkbox__check {
+	width: 13px;
+	height: 13px;
+	color: #080a0f;
+	stroke-dasharray: 24;
+	stroke-dashoffset: 24;
+	transition: stroke-dashoffset 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) 0.05s;
+}
+
+.gl-checkbox__input:checked~.gl-checkbox__box .gl-checkbox__check {
+	stroke-dashoffset: 0;
+}
+
+.gl-checkbox__label {
+	font-size: 0.9rem;
+	font-weight: 400;
+	color: rgba(255, 255, 255, 0.5);
+	transition: color 0.25s ease;
+}
+
+.gl-checkbox:hover .gl-checkbox__label {
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.gl-checkbox__input:checked~.gl-checkbox__label {
+	color: rgba(255, 255, 255, 0.9);
+}
+
+
+.elemento-piscar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 50;
+	overflow: hidden;
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: var(--cor-fundo);
+
+		animation: piscarAnimacaoCima 0.5s ease-out forwards;
+	}
+
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: var(--cor-fundo);
+
+		animation: piscarAnimacaoBaixo 0.5s ease-out forwards;
 	}
 }

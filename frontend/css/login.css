@@ -73,7 +73,6 @@ body {
 	align-items: center;
 
 	background-color: var(--cor-fundo);
-	box-shadow: 0 0 0px 2px rgb(255, 255, 255), 0px 0px 5px 0px rgb(0 0 0 / 40%);
 
 	border-radius: 50%;
 	aspect-ratio: 1 / 1;

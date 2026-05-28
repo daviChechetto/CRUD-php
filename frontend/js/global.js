@@ -31,3 +31,15 @@ function obterParametroConsulta(parametro) {
 	const parametrosUrl = new URLSearchParams(window.location.search);
 	return parametrosUrl.get(parametro);
 }
+
+// tipo de mensagem: "sucesso" e "erro"
+function mostrarMensagem(texto, tipo) {
+	const mensagem = $('<div class="mensagem ' + tipo + '">' + texto + '</div>');
+	UI.body.prepend(mensagem);
+
+	setTimeout(function () {
+		mensagem.fadeOut(300, function () {
+			$(this).remove();
+		});
+	}, 4000);
+}

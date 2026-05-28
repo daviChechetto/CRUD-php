@@ -89,4 +89,34 @@ class UsersController extends AppController
         $this->viewBuilder()->setClassName('Json');
         $this->viewBuilder()->setOption('serialize', 'status');
     }
+    public function login($id = null)
+    {
+        // Apenas aceita requeisições do tipo POST
+        $this->request->allowMethod(['post']);
+
+        $data = $this->request->getData();
+        $user = $this->Users->find()
+            ->where([
+                'username' => $data['username'],
+                'password' => $data['password']
+            ])
+            ->first();
+
+
+        if ($user && $user->status == 1) {
+            $status = 'sucesso';
+            $message = 'Credências reconhecidas! Sucesso ao tentar entrar.';
+        } elseif ($user && $user->status == 0) {
+            $status = 'erro';
+            $message = 'Credências negadas! O seu usuário teve a conta desativada.';
+        } else {
+            $status = 'erro';
+            $message = 'Credências negadas! E-mail ou senha incorretos';
+        }
+
+        // Empacotamento da resposta em JSON
+        $this->set(compact('status', 'message', 'user'));
+        $this->viewBuilder()->setClassName('Json');
+        $this->viewBuilder()->setOption('serialize', ['status', 'message', 'user']);
+    }
 }

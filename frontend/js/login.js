@@ -2,6 +2,8 @@ const UI = {
 	body: $("body"),
 	botaoEntrar: $("#botaoEntrar"),
 	loginForm: $("#loginForm"),
+	campoUsername: $("#apelido"),
+	campoSenha: $("#senha"),
 
 	logo: $('.logo')
 }
@@ -14,21 +16,39 @@ function piscar() {
 }
 
 function userLogin(username, password) {
+	const loginData = {
+		username: username,
+		password: password
+	}
 
+	$.ajax({
+		url: CONFIG.apiUrl + '/login.json',
+		type: 'POST',
+		contentType: 'application/json',
+		data: JSON.stringify(loginData),
+		success: function (response) {
+			if (response.status === 'sucesso') {
+				mostrarMensagem(response.message, response.status);
+				piscar();
+				setTimeout(function () {
+					window.location.href = "index.html";
+				}, 1000);
+			} else {
+				mostrarMensagem(response.message, response.status);
+			}
+		},
+		error: function (xhr) {
+			mostrarMensagem(response.message, response.status);
+		}
+	})
 }
 
 UI.loginForm.on('submit', function (e) {
 	e.preventDefault()
-	const username = $("#username").val();
-	const password = $("#password").val();
+	const username = UI.campoUsername.val();
+	const password = UI.campoSenha.val();
 
 	userLogin(username, password);
-
-	piscar();
-
-	setTimeout(function () {
-		window.location.href = "index.html";
-	}, 1000);
 })
 
 

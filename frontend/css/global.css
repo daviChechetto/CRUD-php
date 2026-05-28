@@ -38,6 +38,28 @@
 	}
 }
 
+@keyframes fadeInOut {
+	0% {
+		opacity: 0;
+		transform: translateX(20px);
+	}
+
+	20% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	90% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	100% {
+		opacity: 0;
+		transform: translateX(20px);
+	}
+}
+
 body {
 	font-family: "Noto Sans", sans-serif;
 	color: var(--cor-secundaria);
@@ -1346,5 +1368,36 @@ h3 {
 		width: 10px;
 		height: 10px;
 		opacity: 0;
+	}
+}
+
+.mensagem {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	z-index: 50;
+
+	display: flex;
+	gap: 12px;
+	align-items: center;
+
+	font-weight: 500;
+
+	padding: 16px;
+	border-radius: 8px;
+	margin-bottom: 20px;
+
+	animation: fadeInOut 4s ease forwards;
+	
+	&.sucesso {
+		background-color: #203d22;
+		color: var(--status-ativo);
+		border-left: 4px solid var(--status-ativo);
+	}
+	
+	&.erro {
+		background-color: #3d2020;
+		color: #ff7a7a;
+		border-left: 4px solid #ff7a7a;
 	}
 }

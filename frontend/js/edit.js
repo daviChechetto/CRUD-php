@@ -45,17 +45,6 @@ function atualizarUsuario(idUsuario, dados) {
 	});
 }
 
-function mostrarMensagem(texto, tipo) {
-	const mensagem = $('<div class="mensagem ' + tipo + '">' + texto + '</div>');
-	UI.formularioEdicao.prepend(mensagem);
-
-	setTimeout(function () {
-		mensagem.fadeOut(300, function () {
-			$(this).remove();
-		});
-	}, 4000);
-}
-
 function preencherFormulario(usuario) {
 	if (!usuario) {
 		$('#detalhesUsuario').html('<p class="erro">Usuário não encontrado.</p>');

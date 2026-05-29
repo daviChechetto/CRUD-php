@@ -2,10 +2,12 @@
 
 	const UI = {
 		body: $("body"),
+		avatarLogado: $("#avatarLogado"),
+		listaNavegacao: $('.lista-navegacao'),
+		linkAtalho: $('.link-atalho'),
 	}
 
 	UI.body.append(`<div id="perseguidor"><div class="circulo"></div></div>`)
-
 
 	$(window).on('mousemove', (e) => {
 		const mouseX = e.clientX;
@@ -43,3 +45,27 @@ function mostrarMensagem(texto, tipo) {
 		});
 	}, 4000);
 }
+
+$(document).ready(function() {
+    // Pega apenas o final da URL (ex: "index.html" ou "pages.html")
+    let paginaAtual = window.location.pathname.split("/").pop();
+
+    // Se a pessoa acessar só a pasta raiz (ex: localhost/crud/), assumimos que é o index
+    if (paginaAtual === '') {
+        paginaAtual = 'index.html';
+    }
+
+    // Percorre todos os links dentro da nossa navegação
+    $('.lista-navegacao a').each(function() {
+        const linkHref = $(this).attr('href');
+
+        // Se o href do botão bater com a URL da página atual...
+        if (linkHref === paginaAtual) {
+            // Removemos a classe de todos (por precaução)
+            $('.lista-navegacao li').removeClass('link-selecionado');
+            
+            // E adicionamos a classe apenas no <li> "pai" deste link específico
+            $(this).parent('li').addClass('link-selecionado');
+        }
+    });
+});

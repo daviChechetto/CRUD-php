@@ -9,12 +9,6 @@
 }
 
 
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
 .container-edicao {
 	max-width: 1200px;
 	margin: 120px auto;

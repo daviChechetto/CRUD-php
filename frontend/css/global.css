@@ -7,6 +7,9 @@
 	--cor-fundo: #0F0F0F;
 	--cor-fundo-contraste: #1F1F1F;
 
+	--cor-fonte: #f9f9f9;
+	--cor-fonte-secundario: rgba(249, 249, 249, 0.4);
+
 	--cor-status-ativo: #c3f0c4;
 	--cor-status-inativo: #999999;
 
@@ -23,6 +26,7 @@
 		opacity: 0;
 		transform: translateY(-10px);
 	}
+
 	100% {
 		opacity: 1;
 		transform: translateY(0px);
@@ -33,6 +37,7 @@
 	0% {
 		opacity: 0;
 	}
+
 	100% {
 		opacity: 1;
 	}
@@ -64,13 +69,16 @@ body {
 	font-family: "Noto Sans", sans-serif;
 	color: var(--cor-secundaria);
 
-	margin: 0;
-	opacity: 0;
+	margin: 0 0 0 70px;
 
 	background: var(--cor-fundo);
 	/* Add your background pattern here */
 	background-image: url(//www.devmedia.com.br/view/img/grid-light.png?2);
 	background-attachment: fixed;
+}
+
+main {
+	opacity: 0;
 
 	animation: aparecerConteudo 500ms ease-out forwards;
 }
@@ -182,7 +190,7 @@ h3 {
 		padding: 20px;
 		text-align: left;
 		transition: background-color 0.3s ease;
-		
+
 		opacity: 0;
 		transform: translateY(-10px);
 
@@ -1107,8 +1115,8 @@ h3 {
 
 .botao-voltar {
 	position: absolute;
-	top: 20px;
-	left: 20px;
+	top: 5px;
+	left: 70px;
 
 	display: flex;
 	align-items: center;
@@ -1118,6 +1126,7 @@ h3 {
 	min-width: 45px;
 	width: max-content;
 	height: 45px;
+	box-sizing: border-box;
 
 	border: none;
 	border-radius: 10px;
@@ -1388,16 +1397,150 @@ h3 {
 	margin-bottom: 20px;
 
 	animation: fadeInOut 4s ease forwards;
-	
+
 	&.sucesso {
 		background-color: #203d22;
 		color: var(--status-ativo);
 		border-left: 4px solid var(--status-ativo);
 	}
-	
+
 	&.erro {
 		background-color: #3d2020;
 		color: #ff7a7a;
 		border-left: 4px solid #ff7a7a;
+	}
+}
+
+aside {
+	position: fixed;
+	top: 5px;
+	left: 5px;
+
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+
+	border-radius: 10px;
+	padding: 10px;
+
+	width: 40px;
+	height: calc(100% - 30px);
+
+	background-color: var(--cor-fundo-contraste);
+
+	.hamburger {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		width: 40px;
+		aspect-ratio: 1 / 1;
+
+		cursor: pointer;
+		transition: 250ms;
+		border-radius: 50px;
+
+		&:hover {
+			background-color: #f9f9f915;
+		}
+
+		input {
+			display: none;
+		}
+
+		svg {
+			/* The size of the SVG defines the overall size */
+			height: 2.5em;
+			/* Define the transition for transforming the SVG */
+			transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+		}
+
+		.line {
+			fill: none;
+			stroke: white;
+			stroke-linecap: round;
+			stroke-linejoin: round;
+			stroke-width: 2;
+			/* Define the transition for transforming the Stroke */
+			transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+				stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+		}
+
+		.line-top-bottom {
+			stroke-dasharray: 12 63;
+		}
+
+		input:checked+svg {
+			transform: rotate(-45deg);
+		}
+
+		input:checked+svg .line-top-bottom {
+			stroke-dasharray: 20 300;
+			stroke-dashoffset: -32.42;
+		}
+	}
+
+	nav {
+		height: 100%;
+
+		ul {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			gap: 20px;
+	
+			padding: 0;
+			margin: 0;
+			list-style: none;
+	
+			li {
+				display: flex;
+				justify-content: center;
+				width: 100%;
+	
+				&.link-selecionado a {
+					background-color: #f9f9f915;
+				}
+			}
+	
+			a {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+	
+				color: var(--cor-fonte-secundario);
+				text-align: center;
+	
+				width: 100%;
+				height: 30px;
+	
+				transition: 250ms;
+				border-radius: 50px;
+				text-decoration: none;
+	
+				&:hover {
+					color: var(--cor-fonte);
+					background-color: #f9f9f915;
+				}
+	
+				h3 {
+					display: none;
+				}
+			}
+		}
+	}
+
+	.avatar {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		width: 100%;
+		aspect-ratio: 1 / 1;
+		border-radius: 50%;
+		background: linear-gradient(135deg, #272727 0%, #501a2b 100%);
+
+		flex-shrink: 0;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 	}
 }

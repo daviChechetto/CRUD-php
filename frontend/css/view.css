@@ -10,12 +10,6 @@
 	--status-inativo: #999999;
 }
 
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
 
 .container-view {
 	max-width: 1200px;

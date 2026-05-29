@@ -1,1 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Material Symbols Rounded */
+@font-face {
+        font-family: 'Material Symbols Rounded';
+        font-style: normal;
+        font-weight: 400;
+        /* font-display: swap; */
+        src: url('../fonts/MaterialSymbolsRounded.ttf') format('truetype');
+}
+.material-symbols-rounded {
+        font-family: 'Material Symbols Rounded';
+        font-weight: 400;
+        font-style: normal;
+        font-size: 24px;
+        line-height: 1;
+        display: inline-block;
+        text-transform: none;
+        letter-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        direction: ltr;
+        -webkit-font-smoothing: antialiased;
+        /* Suporte para renderização suave */
+        -moz-osx-font-smoothing: grayscale;
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}

@@ -5,17 +5,17 @@
 	<meta charset="UTF-8">
 	<title>CRUD de Usuários</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
 
-	<link rel="stylesheet" href="css/global.css">
-	<link rel="stylesheet" href="css/fonts.css">
+	<link rel="stylesheet" href="assets/css/global.css">
+	<link rel="stylesheet" href="assets/css/fonts.css">
 
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
-	<script src="js/global.js" defer></script>
+	<script src="assets/js/global.js" defer></script>
 </head>
 
 <body>
-	<aside>
+	<aside id="navegacaoLateral">
 		<label class="hamburger">
 			<input type="checkbox">
 			<svg viewBox="0 0 32 32">
@@ -46,7 +46,33 @@
 		</div>
 	</aside>
 	<main>
-		
+		<section class="container-construtor">
+			<div class="construtor-cabecalho">
+				<input type="text" id="pageTitle" placeholder="Digite o título da página..." required>
+				<button id="btnSalvarPagina" class="animated-button">Salvar Página</button>
+			</div>
+
+			<div class="construtor-estrutura">
+				<aside class="barra-de-ferramentas">
+					<h3>Blocos</h3>
+					<button class="botao-adicionar-bloco" data-type="paragrafo">
+						<span class="material-symbols-rounded">notes</span> Parágrafo
+					</button>
+					<button class="botao-adicionar-bloco" data-type="imagem">
+						<span class="material-symbols-rounded">image</span> Imagem
+					</button>
+					<button class="botao-adicionar-bloco" data-type="lista">
+						<span class="material-symbols-rounded">format_list_bulleted</span> Lista
+					</button>
+				</aside>
+
+				<main id="construtorCanva" class="area-canva">
+					<div class="empty-state">
+						<p>Clique em um bloco ao lado para começar a construir sua página.</p>
+					</div>
+				</main>
+			</div>
+		</section>
 	</main>
 </body>
 

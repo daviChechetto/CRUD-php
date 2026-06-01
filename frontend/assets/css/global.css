@@ -13,11 +13,11 @@
 	--cor-status-ativo: #c3f0c4;
 	--cor-status-inativo: #999999;
 
-	cursor: url(../assets/cursor.svg), default !important;
+	cursor: url(../images/cursor.svg), default !important;
 
 	a:hover,
 	button:hover {
-		cursor: url(../assets/cursor-hover.svg) 12 10, pointer !important;
+		cursor: url(../images/cursor-hover.svg) 12 10, pointer !important;
 	}
 }
 
@@ -84,7 +84,7 @@ main {
 }
 
 label {
-	cursor: url(../assets/cursor.svg), default !important;
+	cursor: url(../images/cursor.svg), default !important;
 }
 
 h1,
@@ -1411,7 +1411,7 @@ h3 {
 	}
 }
 
-aside {
+#navegacaoLateral {
 	position: fixed;
 	top: 5px;
 	left: 5px;

@@ -2,6 +2,8 @@ body {
 	height: 100vh;
 	padding: 20px;
 	box-sizing: border-box;
+
+	margin: 0;
 }
 
 @keyframes piscarAnimacaoCima {
@@ -30,7 +32,7 @@ body {
 	align-items: center;
 	height: 100%;
 
-	background-image: url('../assets/mirante.png');
+	background-image: url('../images/mirante.png');
 	background-size: cover;
 	background-position: center;
 

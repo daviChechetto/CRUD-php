@@ -5,19 +5,19 @@
 	<meta charset="UTF-8">
 	<title>Visualizar Usuário - CRUD</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
 
-	<link rel="stylesheet" href="css/global.css">
-	<link rel="stylesheet" href="css/view.css">
-	<link rel="stylesheet" href="css/fonts.css">
+	<link rel="stylesheet" href="assets/css/global.css">
+	<link rel="stylesheet" href="assets/css/view.css">
+	<link rel="stylesheet" href="assets/css/fonts.css">
 
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
-	<script src="js/global.js" defer></script>
-	<script src="js/view.js" defer></script>
+	<script src="assets/js/global.js" defer></script>
+	<script src="assets/js/view.js" defer></script>
 </head>
 
 <body>
-	<aside>
+	<aside id="navegacaoLateral">
 		<label class="hamburger">
 			<input type="checkbox">
 			<svg viewBox="0 0 32 32">
@@ -50,10 +50,10 @@
 	<main>
 		<section class="container-view">
 			<a href="index.html" class="botao-voltar">
-				<div class="sign"><img src="assets/seta-esquerda.svg" alt=""></div>
+				<div class="sign"><span class="material-symbols-rounded">chevron_left</span></div>
 				<div class="text">Voltar</div>
 			</a>
-	
+
 			<div id="userDetails" class="user-card">
 				<!-- Preenchido por JS -->
 				<div class="user-header">
@@ -73,7 +73,7 @@
 								</path>
 							</svg>
 						</button>
-	
+
 						<!-- From Uiverse.io by vinodjangid07 -->
 						<button id="botaoExcluirUsuario" class="bin-button excluir">
 							<svg class="bin-top" viewBox="0 0 39 7" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -94,7 +94,7 @@
 						</button>
 					</div>
 				</div>
-	
+
 				<div class="user-content">
 					<div class="user-data-section">
 						<h2 class="section-title">📁 Dados do usuário</h2>
@@ -126,7 +126,7 @@
 						</div>
 					</div>
 				</div>
-	
+
 			</div>
 		</section>
 	</main>

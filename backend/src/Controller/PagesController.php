@@ -1,73 +1,116 @@
 <?php
+
 declare(strict_types=1);
 
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link      https://cakephp.org CakePHP(tm) Project
- * @since     0.2.9
- * @license   https://opensource.org/licenses/mit-license.php MIT License
- */
 namespace App\Controller;
 
-use Cake\Core\Configure;
-use Cake\Http\Exception\ForbiddenException;
-use Cake\Http\Exception\NotFoundException;
-use Cake\Http\Response;
-use Cake\View\Exception\MissingTemplateException;
+use Psr\Http\Message\UploadedFileInterface;
 
 /**
- * Static content controller
+ * Pages Controller
  *
- * This controller will render views from templates/Pages/
- *
- * @link https://book.cakephp.org/5/en/controllers/pages-controller.html
+ * @property \App\Model\Table\PagesTable $Pages
  */
 class PagesController extends AppController
 {
-    /**
-     * Displays a view
-     *
-     * @param string ...$path Path segments.
-     * @return \Cake\Http\Response|null
-     * @throws \Cake\Http\Exception\ForbiddenException When a directory traversal attempt.
-     * @throws \Cake\View\Exception\MissingTemplateException When the view file could not
-     *   be found and in debug mode.
-     * @throws \Cake\Http\Exception\NotFoundException When the view file could not
-     *   be found and not in debug mode.
-     * @throws \Cake\View\Exception\MissingTemplateException In debug mode.
-     */
-    public function display(string ...$path): ?Response
-    {
-        if (!$path) {
-            return $this->redirect('/');
-        }
-        if (in_array('..', $path, true) || in_array('.', $path, true)) {
-            throw new ForbiddenException();
-        }
-        $page = $subpage = null;
+	public function add()
+	{
+		$page = $this->Pages->newEmptyEntity();
+		$uploadError = null;
 
-        if (!empty($path[0])) {
-            $page = $path[0];
-        }
-        if (!empty($path[1])) {
-            $subpage = $path[1];
-        }
-        $this->set(compact('page', 'subpage'));
+		if ($this->request->is('post')) {
 
-        try {
-            return $this->render(implode('/', $path));
-        } catch (MissingTemplateException $exception) {
-            if (Configure::read('debug')) {
-                throw $exception;
-            }
-            throw new NotFoundException();
-        }
-    }
+			$data = $this->request->getData();
+
+			foreach ($data['page_blocks'] as &$bloco) {
+
+				if ($bloco['tipo'] === 'imagem') {
+					$arquivo = $bloco['uploaded_file'] ?? null;
+
+					if ($arquivo instanceof UploadedFileInterface && $arquivo->getError() === \UPLOAD_ERR_OK) {
+						if ($this->isValidImageUpload($arquivo)) {
+							$nomeDoArquivo = $this->storeUploadedImage($arquivo);
+
+							$bloco['conteudo'] = [
+								'file_path' => $nomeDoArquivo,
+								'alt_text' => $bloco['alt_text'] ?? ''
+							];
+						} else {
+							$uploadError = 'Apenas imagens JPG, JPEG, PNG, GIF ou WEBP sao permitidas.';
+						}
+					} else {
+						$uploadError = 'Selecione uma imagem valida para upload.';
+					}
+				}
+
+				// Independentemente de ser imagem ou não, ou de ter dado erro ou não,
+                // nós destruímos essa chave. O banco de dados não tem a coluna "uploaded_file",
+                // então se isso chegar no $this->Pages->save(), o CakePHP vai travar.
+                if (isset($bloco['uploaded_file'])) {
+                    unset($bloco['uploaded_file']);
+                }
+                
+                // Limpamos também o alt_text solto, já que o guardamos para dentro de 'conteudo'
+                if (isset($bloco['alt_text'])) {
+                    unset($bloco['alt_text']);
+                }
+			}
+
+			$page = $this->Pages->patchEntity($page, $data);
+
+			if ($uploadError !== null) {
+				$page->setError('uploaded_file', [$uploadError]);
+			}
+
+			if ($this->Pages->save($page)) {
+				$status = 'sucesso';
+			} else {
+				$status = 'erro ao salvar a página sobre: ' . $page->id;
+			}
+		}
+
+		$this->set(compact('page', 'status'));
+		$this->viewBuilder()->setClassName('Json');
+		$this->viewBuilder()->setOption('serialize', ['page', 'status']);
+	}
+
+	private function storeUploadedImage(UploadedFileInterface $uploadedFile): string
+	{
+		$targetDir = WWW_ROOT . 'img' . DS . 'pages' . DS;
+		if (!is_dir($targetDir)) {
+			mkdir($targetDir, 0775, true);
+		}
+
+		$clientFileName = (string)$uploadedFile->getClientFilename();
+		$extension = strtolower((string)pathinfo($clientFileName, PATHINFO_EXTENSION));
+		$baseName = (string)pathinfo($clientFileName, PATHINFO_FILENAME);
+		$safeBaseName = strtolower(trim((string)preg_replace('/[^a-zA-Z0-9_-]+/', '-', $baseName), '-'));
+		if ($safeBaseName === '') {
+			$safeBaseName = 'imagem-pagina';
+		}
+
+		$fileName = $safeBaseName . '-' . date('YmdHis') . '-' . substr(sha1(uniqid('', true)), 0, 8) . '.' . $extension;
+		$uploadedFile->moveTo($targetDir . $fileName);
+
+		return $fileName;
+	}
+
+	private function isValidImageUpload(UploadedFileInterface $uploadedFile): bool
+	{
+		$clientFileName = (string)$uploadedFile->getClientFilename();
+		$extension = strtolower((string)pathinfo($clientFileName, PATHINFO_EXTENSION));
+		$allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+		if (!in_array($extension, $allowedExtensions, true)) {
+			return false;
+		}
+
+		$stream = $uploadedFile->getStream();
+		$uri = $stream->getMetadata('uri');
+		if (!is_string($uri) || $uri === '' || !is_file($uri)) {
+			return false;
+		}
+
+		$imageInfo = @getimagesize($uri);
+		return $imageInfo !== false;
+	}
 }

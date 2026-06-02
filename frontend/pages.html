@@ -9,9 +9,12 @@
 
 	<link rel="stylesheet" href="assets/css/global.css">
 	<link rel="stylesheet" href="assets/css/fonts.css">
+	<link rel="stylesheet" href="assets/css/pages.css">
 
 	<script src="node_modules/jquery/dist/jquery.min.js" defer></script>
 	<script src="assets/js/global.js" defer></script>
+	<script src="node_modules/sortablejs/Sortable.min.js" defer></script>
+	<script src="assets/js/pages.js" defer></script>
 </head>
 
 <body>
@@ -45,34 +48,78 @@
 			<div id="avatarLogado" class="avatar">D</div>
 		</div>
 	</aside>
-	<main>
-		<section class="container-construtor">
-			<div class="construtor-cabecalho">
-				<input type="text" id="pageTitle" placeholder="Digite o título da página..." required>
-				<button id="btnSalvarPagina" class="animated-button">Salvar Página</button>
-			</div>
-
-			<div class="construtor-estrutura">
-				<aside class="barra-de-ferramentas">
-					<h3>Blocos</h3>
-					<button class="botao-adicionar-bloco" data-type="paragrafo">
-						<span class="material-symbols-rounded">notes</span> Parágrafo
-					</button>
-					<button class="botao-adicionar-bloco" data-type="imagem">
-						<span class="material-symbols-rounded">image</span> Imagem
-					</button>
-					<button class="botao-adicionar-bloco" data-type="lista">
-						<span class="material-symbols-rounded">format_list_bulleted</span> Lista
-					</button>
-				</aside>
-
-				<main id="construtorCanva" class="area-canva">
-					<div class="empty-state">
-						<p>Clique em um bloco ao lado para começar a construir sua página.</p>
+	<main class="container-construtor">
+		<aside class="barra-de-ferramentas">
+			<h3>Blocos</h3>
+			<button class="botao-adicionar-bloco" data-type="titulo-1">
+				<span class="material-symbols-rounded">notes</span>
+				<h4>Título Principal</h4>
+			</button>
+			<button class="botao-adicionar-bloco" data-type="titulo-2">
+				<span class="material-symbols-rounded">notes</span>
+				<h4>Título Secundário</h4>
+			</button>
+			<button class="botao-adicionar-bloco" data-type="titulo-3">
+				<span class="material-symbols-rounded">notes</span>
+				<h4>Título Terciário</h4>
+			</button>
+			<button class="botao-adicionar-bloco" data-type="paragrafo">
+				<span class="material-symbols-rounded">notes</span>
+				<h4>Parágrafo</h4>
+			</button>
+			<button class="botao-adicionar-bloco" data-type="aviso">
+				<span class="material-symbols-rounded">notes</span>
+				<h4>Aviso</h4>
+			</button>
+			<button class="botao-adicionar-bloco" data-type="lista">
+				<span class="material-symbols-rounded">format_list_bulleted</span>
+				<h4>Lista</h4>
+			</button>
+			<button class="botao-adicionar-bloco" data-type="passo-a-passo">
+				<span class="material-symbols-rounded">format_list_bulleted</span>
+				<h4>Passo a passo</h4>
+			</button>
+			<button class="botao-adicionar-bloco" data-type="anexos">
+				<span class="material-symbols-rounded">format_list_bulleted</span>
+				<h4>Lista de anexos</h4>
+			</button>
+			<button class="botao-adicionar-bloco" data-type="imagem">
+				<span class="material-symbols-rounded">image</span>
+				<h4>Imagem</h4>
+			</button>
+			<button class="botao-adicionar-bloco" data-type="banner">
+				<span class="material-symbols-rounded">image</span>
+				<h4>Banner</h4>
+			</button>
+		</aside>
+		<div class="construtor-estrutura">
+			<section class="construtor-cabecalho">
+				<div class="form-group">
+					<input type="text" id="pageTitle" class="campo-texto" required>
+					<label for="pageTitle" class="user-label">Título</label>
+				</div>
+				<!-- From Uiverse.io by Peary74 -->
+				<button type="submit" id="botaoSalvarPagina">
+					<div class="svg-wrapper-1">
+						<div class="svg-wrapper">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30"
+								class="icon">
+								<path
+									d="M22,15.04C22,17.23 20.24,19 18.07,19H5.93C3.76,19 2,17.23 2,15.04C2,13.07 3.43,11.44 5.31,11.14C5.28,11 5.27,10.86 5.27,10.71C5.27,9.33 6.38,8.2 7.76,8.2C8.37,8.2 8.94,8.43 9.37,8.8C10.14,7.05 11.13,5.44 13.91,5.44C17.28,5.44 18.87,8.06 18.87,10.83C18.87,10.94 18.87,11.06 18.86,11.17C20.65,11.54 22,13.13 22,15.04Z">
+								</path>
+							</svg>
+						</div>
 					</div>
-				</main>
-			</div>
-		</section>
+					<span>Salvar</span>
+				</button>
+			</section>
+
+			<section id="construtorCanva" class="area-canva">
+				<div class="campo-vazio">
+					<p>Clique em um bloco ao lado para começar a construir sua página.</p>
+				</div>
+			</section>
+		</div>
 	</main>
 </body>
 

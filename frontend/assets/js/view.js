@@ -12,7 +12,7 @@ const UI = {
 
 function deletarUsuario(userId) {
 	$.ajax({
-		url: CONFIG.apiUrl + '/' + userId + '.json',
+		url: CONFIG.apiUrl + 'users/' + userId + '.json',
 		type: "DELETE",
 		success: function (response) {
 			console.log("usuário excluído com sucesso!", response);
@@ -27,7 +27,7 @@ function deletarUsuario(userId) {
 };
 
 function buscarUsuario(userId) {
-	return $.get(CONFIG.apiUrl)
+	return $.get(CONFIG.apiUrl + 'users/')
 		.then(function (data) {
 			return data.find(u => u.id == userId);
 		})

@@ -43,7 +43,7 @@
 // A URL base da nossa API no backend
 
 const CONFIG = {
-	apiUrl: 'http://localhost/crud/backend/users'
+	apiUrl: 'http://localhost/crud/backend/'
 }
 
 function obterParametroConsulta(parametro) {

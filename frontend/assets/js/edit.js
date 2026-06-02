@@ -15,7 +15,7 @@ const UI = {
 }
 
 function buscarUsuarioPorId(idUsuario) {
-	return $.get(CONFIG.apiUrl)
+	return $.get(CONFIG.apiUrl + 'users/')
 		.then(function (dados) {
 			return dados.find(u => u.id == idUsuario);
 		})
@@ -27,7 +27,7 @@ function buscarUsuarioPorId(idUsuario) {
 
 function atualizarUsuario(idUsuario, dados) {
 	return $.ajax({
-		url: CONFIG.apiUrl + '/' + idUsuario + '.json',
+		url: CONFIG.apiUrl + 'users/' + idUsuario + '.json',
 		type: "PUT",
 		contentType: 'application/json',
 		data: JSON.stringify(dados),

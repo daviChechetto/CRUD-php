@@ -20,7 +20,7 @@ function closeModal() {
 
 
 function refresh() {
-	$.get(CONFIG.apiUrl, function (data) {
+	$.get(CONFIG.apiUrl + 'users/' , function (data) {
 		UI.corpoTabela.empty().append(data.map(user => `
 			<a href="view.html?id=${user.id}" class="user-item">
 				<div>${user.id}</div>
@@ -109,7 +109,7 @@ function refresh() {
 
 function cadastrarUsuario(userData) {
 	$.ajax({
-		url: CONFIG.apiUrl,
+		url: CONFIG.apiUrl + 'users/',
 		type: "POST",
 		contentType: "application/json",
 		data: JSON.stringify(userData),

@@ -59,17 +59,13 @@ return function (RouteBuilder $routes): void {
          */
         $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
-        /*
-         * ...and connect the rest of 'Pages' controller's URLs.
-         */
-        $builder->connect('/pages/*', 'Pages::display');
+        $builder->post('/pages/add', ['controller' => 'Pages', 'action' => 'add']);
 
         // Habilita que a nossa API responda no formato JSON
         $builder->setExtensions(['json']);
 
         // Cria automaticamente todas as rotas RESTful para os usuários
         $builder->resources('Users');
-
         /*
          * Connect catchall routes for all controllers.
          *

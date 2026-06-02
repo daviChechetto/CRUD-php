@@ -261,7 +261,9 @@ h3 {
 
 .user-label {
 	position: absolute;
+	top: 0;
 	left: 15px;
+
 	color: #e8e8e8;
 	pointer-events: none;
 	transform: translateY(1rem);

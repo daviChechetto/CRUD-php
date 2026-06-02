@@ -13,11 +13,11 @@
 	--cor-status-ativo: #c3f0c4;
 	--cor-status-inativo: #999999;
 
-	cursor: url(../images/cursor.svg), default !important;
+	cursor: url(../images/cursor.svg), default;
 
 	a:hover,
 	button:hover {
-		cursor: url(../images/cursor-hover.svg) 12 10, pointer !important;
+		cursor: url(../images/cursor-hover.svg) 12 10, pointer;
 	}
 }
 
@@ -78,13 +78,14 @@ body {
 }
 
 main {
+	margin: 20px;
 	opacity: 0;
 
 	animation: aparecerConteudo 500ms ease-out forwards;
 }
 
 label {
-	cursor: url(../images/cursor.svg), default !important;
+	cursor: url(../images/cursor.svg), default;
 }
 
 h1,
@@ -96,9 +97,6 @@ h6 {
 	font-weight: 300;
 }
 
-h2 {
-	margin-inline: 20px;
-}
 
 h3 {
 	text-align: center;
@@ -289,7 +287,7 @@ h3 {
 }
 
 /* From Uiverse.io by Peary74 */
-#botaoSalvar {
+#botaoSalvar, #botaoSalvarPagina {
 	position: relative;
 	font-family: 'Nothing You Could Do', cursive;
 	font-weight: 1000;

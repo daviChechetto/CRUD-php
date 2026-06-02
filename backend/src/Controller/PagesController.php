@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Psr\Http\Message\UploadedFileInterface;
+use Cake\Utility\Text;
 
 /**
  * Pages Controller
@@ -22,9 +23,14 @@ class PagesController extends AppController
 
 			$data = $this->request->getData();
 
+			// Tratando o slug: se o título for fornecido, geramos um slug automaticamente
+			if (!empty($data['title'])) {
+				$data['slug'] = strtolower(Text::slug($data['title']));
+			}
+
 			foreach ($data['page_blocks'] as &$bloco) {
 
-				if ($bloco['tipo'] === 'imagem') {
+				if ($bloco['tipo'] === 'imagem' || $bloco['tipo'] === 'banner') {
 					$arquivo = $bloco['uploaded_file'] ?? null;
 
 					if ($arquivo instanceof UploadedFileInterface && $arquivo->getError() === \UPLOAD_ERR_OK) {
@@ -40,6 +46,11 @@ class PagesController extends AppController
 						}
 					} else {
 						$uploadError = 'Selecione uma imagem valida para upload.';
+					}
+				} else {
+					// Forçamos os blocos de texto a virarem Array para a coluna JSON
+					if (isset($bloco['conteudo']) && is_string($bloco['conteudo'])) {
+						$bloco['conteudo'] = ['texto' => $bloco['conteudo']];
 					}
 				}
 
@@ -64,14 +75,16 @@ class PagesController extends AppController
 
 			if ($this->Pages->save($page)) {
 				$status = 'sucesso';
+				$errors = [];
 			} else {
 				$status = 'erro ao salvar a página sobre: ' . $page->id;
+				$errors = $page->getErrors();
 			}
 		}
 
-		$this->set(compact('page', 'status'));
+		$this->set(compact('page', 'status', 'errors'));
 		$this->viewBuilder()->setClassName('Json');
-		$this->viewBuilder()->setOption('serialize', ['page', 'status']);
+		$this->viewBuilder()->setOption('serialize', ['page', 'status', 'errors']);
 	}
 
 	private function storeUploadedImage(UploadedFileInterface $uploadedFile): string

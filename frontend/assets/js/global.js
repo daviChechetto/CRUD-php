@@ -18,7 +18,7 @@
 		});
 	})
 
-	$("a, button").hover(function () {
+	$("a, button, input").hover(function () {
 		$("#perseguidor").addClass('esconder')
 	}, function () {
 		$("#perseguidor").removeClass('esconder')
@@ -45,8 +45,9 @@
 const CONFIG = {
 	apiUrl: 'http://localhost/crud/backend/',
 	navegacao: [
-		{ titulo: 'Usuários', href: 'index.html', icone: 'person' },
-		{ titulo: 'Páginas', href: 'pages.html', icone: 'auto_stories' }
+		{ titulo: 'Usuários', href: 'index-users.html', icone: 'person' },
+		{ titulo: 'Páginas Add', href: 'pages.html', icone: 'add_notes' },
+		{ titulo: 'Páginas', href: 'index-pages.html', icone: 'auto_stories' },
 	]
 }
 
@@ -92,7 +93,7 @@ $(document).ready(function () {
 
 	// Se a pessoa acessar só a pasta raiz (ex: localhost/crud/), assumimos que é o index
 	if (paginaAtual === '') {
-		paginaAtual = 'index.html';
+		paginaAtual = 'index-users.html';
 	}
 
 	// Percorre todos os links dentro da nossa navegação

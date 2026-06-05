@@ -1,9 +1,7 @@
-
 const UI = {
 	botaoRefresh: $('#botaoRefresh'),
 	botaoCadastrarUsuario: $('#botaoCadastrarUsuario'),
 	botaoSalvar: $('#botaoSalvar'),
-	botaoCancelar: $('#btnCancel'),
 
 	corpoTabela: $('#corpoTabela'),
 	formularioCadastrarUsuario: $('#formularioCadastrarUsuario'),
@@ -17,7 +15,6 @@ function closeModal() {
 		$('#userId').val('');
 	}
 }
-
 
 function refresh() {
 	$.get(CONFIG.apiUrl + 'users/' , function (data) {
@@ -153,10 +150,6 @@ UI.botaoSalvar.on('click', function (e) {
 	};
 	
 	cadastrarUsuario(userData);
-});
-
-UI.botaoCancelar.on('click', function () {
-	closeModal();
 });
 
 $(document).on('click', function (e) {

@@ -22,7 +22,7 @@ function userLogin(username, password) {
 	}
 
 	$.ajax({
-		url: CONFIG.apiUrl + '/login.json',
+		url: CONFIG.apiUrl + 'users/login.json',
 		type: 'POST',
 		contentType: 'application/json',
 		data: JSON.stringify(loginData),
@@ -31,7 +31,7 @@ function userLogin(username, password) {
 				mostrarMensagem(response.message, response.status);
 				piscar();
 				setTimeout(function () {
-					window.location.href = "index.html";
+					window.location.href = "index-users.html";
 				}, 1000);
 			} else {
 				mostrarMensagem(response.message, response.status);

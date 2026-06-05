@@ -68,9 +68,9 @@ class PageBlocksTable extends Table
     {
         $validator
             ->scalar('title')
-            ->maxLength('title', 255)
-            ->requirePresence('title', 'create')
-            ->notEmptyString('title');
+            ->maxLength('title', 255);
+            // ->requirePresence('title', 'create')
+            // ->notEmptyString('title');
 
         $validator
             ->integer('page_id')

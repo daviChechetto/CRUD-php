@@ -22,13 +22,52 @@ class PagesController extends AppController
 		if ($this->request->is('post')) {
 
 			$data = $this->request->getData();
+			// Exemplo de estrutura de $data esperado:
+			// Array
+			// (
+			//   [title] => "Minha Página"
+			//   [slug] => "minha-pagina"
+			//   [user_id] => 1
+			//   [ativo] => 1
+			//   [page_blocks] => Array
+			//     (
+			//       [0] => Array
+			//         (
+			//           [tipo] => "texto"
+			//           [conteudo] => Array
+			//             (
+			//               [texto] => "Conteúdo do bloco de texto"
+			//             )
+			//           [user_id] => 1
+			//           [ativo] => 1
+			//         )
+			//       [1] => Array
+			//         (
+			//           [tipo] => "imagem"
+			//           [conteudo] => Array
+			//         (
+			//           [file_path] => "imagem-pagina-20260605120000-abc12345.jpg"
+			//           [alt_text] => "Descrição da imagem"
+			//         )
+			//       [user_id] => 1
+			//       [ativo] => 1
+			//     )
+			//   )
+			// )
 
 			// Tratando o slug: se o título for fornecido, geramos um slug automaticamente
 			if (!empty($data['title'])) {
 				$data['slug'] = strtolower(Text::slug($data['title']));
 			}
 
+			// Definimos um usuário padrão para salvar a página e os blocos.
+			// Ajuste para usar o usuário autenticado quando houver autenticação.
+			$data['user_id'] = 1;
+			$data['ativo'] = 1;
+
 			foreach ($data['page_blocks'] as &$bloco) {
+				$bloco['user_id'] = 1;
+				$bloco['ativo'] = 1;
 
 				if ($bloco['tipo'] === 'imagem' || $bloco['tipo'] === 'banner') {
 					$arquivo = $bloco['uploaded_file'] ?? null;
@@ -55,16 +94,16 @@ class PagesController extends AppController
 				}
 
 				// Independentemente de ser imagem ou não, ou de ter dado erro ou não,
-                // nós destruímos essa chave. O banco de dados não tem a coluna "uploaded_file",
-                // então se isso chegar no $this->Pages->save(), o CakePHP vai travar.
-                if (isset($bloco['uploaded_file'])) {
-                    unset($bloco['uploaded_file']);
-                }
-                
-                // Limpamos também o alt_text solto, já que o guardamos para dentro de 'conteudo'
-                if (isset($bloco['alt_text'])) {
-                    unset($bloco['alt_text']);
-                }
+				// nós destruímos essa chave. O banco de dados não tem a coluna "uploaded_file",
+				// então se isso chegar no $this->Pages->save(), o CakePHP vai travar.
+				if (isset($bloco['uploaded_file'])) {
+					unset($bloco['uploaded_file']);
+				}
+
+				// Limpamos também o alt_text solto, já que o guardamos para dentro de 'conteudo'
+				if (isset($bloco['alt_text'])) {
+					unset($bloco['alt_text']);
+				}
 			}
 
 			$page = $this->Pages->patchEntity($page, $data);

@@ -87,6 +87,30 @@ class PagesController extends AppController
 		$this->viewBuilder()->setOption('serialize', ['page', 'status', 'errors']);
 	}
 
+	public function index()
+	{
+		$pages = $this->Pages->find('all')
+			->contain(['PageBlocks'])
+			->orderBy(['Pages.modified' => 'DESC'])
+			->all();
+
+		$pagesList = $pages->map(function ($page) {
+			return [
+				'id' => $page->id,
+				'title' => $page->title,
+				'user_id' => $page->user_id,
+				'ativo' => $page->ativo,
+				'created' => $page->created->format('d/m/Y H:i'),
+				'modified' => $page->modified->format('d/m/Y H:i'),
+				'blocks_count' => count($page->page_blocks)
+			];
+		});
+
+		$this->set(compact('pagesList'));
+		$this->viewBuilder()->setClassName('Json');
+		$this->viewBuilder()->setOption('serialize', ['pagesList']);
+	}
+
 	private function storeUploadedImage(UploadedFileInterface $uploadedFile): string
 	{
 		$targetDir = WWW_ROOT . 'img' . DS . 'pages' . DS;

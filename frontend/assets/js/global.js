@@ -43,12 +43,32 @@
 // A URL base da nossa API no backend
 
 const CONFIG = {
-	apiUrl: 'http://localhost/crud/backend/'
+	apiUrl: 'http://localhost/crud/backend/',
+	navegacao: [
+		{ titulo: 'Usuários', href: 'index.html', icone: 'person' },
+		{ titulo: 'Páginas', href: 'pages.html', icone: 'auto_stories' }
+	]
 }
 
 function obterParametroConsulta(parametro) {
 	const parametrosUrl = new URLSearchParams(window.location.search);
 	return parametrosUrl.get(parametro);
+}
+
+function gerarNavegacao() {
+	const listaNavegacao = $('.lista-navegacao');
+	
+	CONFIG.navegacao.forEach(link => {
+		const item = $(`
+			<li>
+				<a href="${link.href}">
+					<span class="material-symbols-rounded">${link.icone}</span>
+					<h3>${link.titulo}</h3>
+				</a>
+			</li>
+		`);
+		listaNavegacao.append(item);
+	});
 }
 
 // tipo de mensagem: "sucesso" e "erro"
@@ -64,6 +84,9 @@ function mostrarMensagem(texto, tipo) {
 }
 
 $(document).ready(function () {
+	// Gera a navegação dinamicamente a partir do CONFIG
+	gerarNavegacao();
+
 	// Pega apenas o final da URL (ex: "index.html" ou "pages.html")
 	let paginaAtual = window.location.pathname.split("/").pop();
 

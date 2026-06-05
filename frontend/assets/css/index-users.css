@@ -1,0 +1,206 @@
+#botaoRefresh {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    color: white;
+
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* From Uiverse.io by vinodjangid07 */
+#botaoCadastrarUsuario {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;
+
+    min-width: 45px;
+    width: max-content;
+    height: 45px;
+
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin-inline: auto;
+
+    cursor: pointer;
+    overflow: hidden;
+    transition: 250ms ease-in-out;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+    background-color: var(--cor-fundo-contraste);
+
+    .sign {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: max-content;
+        text-align: center;
+        font-size: 2em;
+        color: white;
+        transition: 250ms ease-in-out;
+        pointer-events: none;
+    }
+
+    .text {
+        max-width: 0px;
+        width: max-content;
+        opacity: 0;
+        color: white;
+        font-size: 1.2em;
+        font-weight: 500;
+        transition: 250ms ease-in-out;
+        pointer-events: none;
+    }
+
+    /* hover effect on button width */
+    &:hover {
+        gap: 10px;
+
+        .text {
+            opacity: 1;
+            max-width: 200px;
+        }
+    }
+
+    &:active {
+        transform: translate(2px, 2px);
+    }
+}
+
+.container-formulario {
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	z-index: 5;
+
+	pointer-events: none;
+	opacity: 0;
+
+	width: 400px;
+	transition: 150ms ease-out;
+
+	&.mostrar-formulario {
+		pointer-events: auto;
+		opacity: 1;
+	}
+
+	&::before {
+		content: "";
+		position: absolute;
+		z-index: -1;
+
+		width: 100vw;
+		height: 100vh;
+
+		background-color: rgba(0, 0, 0, 0.5);
+		backdrop-filter: blur(5px);
+	}
+
+	.titulo-formulario {
+		margin-top: 0;
+		font-weight: 300;
+	}
+
+	#userForm {
+		position: absolute;
+		top: 50vh;
+		left: 50vw;
+		z-index: 5;
+		transform: translate(-50%, -50%);
+
+		background: var(--cor-fundo-contraste);
+		padding: 15px;
+		background: linear-gradient(#212121, #212121) padding-box,
+			linear-gradient(145deg, transparent 35%, #b1b1b1, #ffffff) border-box;
+		border: 2px solid transparent;
+		border-radius: 30px;
+
+		width: 400px;
+		transition: 150ms ease-out;
+	}
+}
+
+#usersTable {
+	width: 100%;
+	max-width: 800px;
+	border-collapse: collapse;
+	margin: 20px auto;
+
+	border: 2px solid var(--cor-fundo-contraste);
+	border-radius: 10px;
+
+	.table-header {
+		display: grid;
+		grid-template-columns: 1fr 10fr 10fr 3fr;
+		gap: 10px;
+
+		list-style: none;
+
+		margin: 0;
+		padding: 20px;
+		text-align: left;
+	}
+
+	#corpoTabela .user-item {
+		display: grid;
+		grid-template-columns: 1fr 10fr 10fr 3fr;
+		gap: 10px;
+
+		list-style: none;
+		text-decoration: none;
+
+		margin: 0;
+		padding: 20px;
+		text-align: left;
+		transition: background-color 0.3s ease;
+
+		opacity: 0;
+		transform: translateY(-10px);
+
+		animation: fadeIn 500ms ease-out forwards;
+
+		&:nth-child(even) {
+			background-color: var(--cor-fundo-contraste);
+
+			.status-inativo {
+				background-color: var(--cor-fundo);
+			}
+		}
+
+		&:hover {
+			background-color: #171717;
+		}
+
+		div {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+
+			color: var(--cor-secundaria);
+		}
+	}
+}
+
+.status-badge {
+	display: inline-block;
+	padding: 6px 12px;
+	border-radius: 16px;
+	font-size: 12px;
+	font-weight: 600;
+	width: fit-content;
+}
+
+.status-ativo {
+	background-color: #203d22;
+	color: var(--cor-status-ativo);
+}
+
+.status-inativo {
+	background-color: var(--cor-fundo-contraste);
+	color: var(--cor-status-inativo);
+}

@@ -84,7 +84,15 @@ class PageBlocksTable extends Table
 
         $validator
             ->requirePresence('conteudo', 'create')
-            ->notEmptyString('conteudo');
+            ->add('conteudo', 'notEmpty', [
+                'rule' => function ($value) {
+                    if (is_array($value)) {
+                        return !empty($value);
+                    }
+                    return is_string($value) && trim($value) !== '';
+                },
+                'message' => 'O conteúdo do bloco é obrigatório.',
+            ]);
 
         $validator
             ->requirePresence('sort_order', 'create')

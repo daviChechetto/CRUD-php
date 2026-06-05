@@ -98,6 +98,19 @@
 					<input type="text" id="pageTitle" class="campo-texto" required>
 					<label for="pageTitle" class="user-label">Título</label>
 				</div>
+				<button type="button" id="botaoVerPrevia" class="botao-previa">
+					<span class="material-symbols-rounded" style="vertical-align: middle;">visibility</span> Prévia
+				</button>
+			</section>
+
+			<section id="construtorCanva" class="area-canva">
+				<div class="campo-vazio">
+					<p>Clique em um bloco ao lado para começar a construir sua página.</p>
+				</div>
+			</section>
+
+			<section class="construtor-footer">
+
 				<!-- From Uiverse.io by Peary74 -->
 				<button type="submit" id="botaoSalvarPagina">
 					<div class="svg-wrapper-1">
@@ -121,6 +134,20 @@
 			</section>
 		</div>
 	</main>
+	<div id="modalPrevia" class="modal-overlay" style="display: none;">
+		<div class="modal-conteudo">
+			<div class="modal-cabecalho">
+				<h2 id="nomeDaPagina">Prévia da Página</h2>
+				<button id="botaoFecharPrevia" class="botao-fechar">
+					<span class="X"></span>
+					<span class="Y"></span>
+					<div class="close">Fechar</div>
+				</button>
+			</div>
+			<div id="areaDeRenderizacao" class="conteudo-renderizado">
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>

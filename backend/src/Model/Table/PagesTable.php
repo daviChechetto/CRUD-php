@@ -75,9 +75,9 @@ class PagesTable extends Table
 
         $validator
             ->scalar('slug')
-            ->maxLength('slug', 255)
-            ->requirePresence('slug', 'create')
-            ->notEmptyString('slug');
+            ->maxLength('slug', 255);
+            // ->requirePresence('slug', 'create')
+            // ->notEmptyString('slug');
 
         $validator
             ->scalar('status')

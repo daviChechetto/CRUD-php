@@ -43,7 +43,7 @@ class PageBlocksTable extends Table
         parent::initialize($config);
 
         $this->setTable('page_blocks');
-        $this->setDisplayField('title');
+        $this->setDisplayField('type');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
@@ -67,31 +67,30 @@ class PageBlocksTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->scalar('title')
-            ->maxLength('title', 255);
-            // ->requirePresence('title', 'create')
-            // ->notEmptyString('title');
-
-        $validator
             ->integer('page_id')
             ->notEmptyString('page_id');
 
         $validator
-            ->scalar('tipo')
-            ->maxLength('tipo', 255)
-            ->requirePresence('tipo', 'create')
-            ->notEmptyString('tipo');
+            ->scalar('type')
+            ->maxLength('type', 255)
+            ->requirePresence('type', 'create')
+            ->notEmptyString('type');
 
         $validator
-            ->requirePresence('conteudo', 'create')
-            ->add('conteudo', 'notEmpty', [
+            ->requirePresence('content', 'create')
+            ->add('content', 'validContent', [
                 'rule' => function ($value) {
                     if (is_array($value)) {
                         return !empty($value);
                     }
-                    return is_string($value) && trim($value) !== '';
+
+                    if (is_string($value)) {
+                        return trim($value) !== '';
+                    }
+
+                    return false;
                 },
-                'message' => 'O conteúdo do bloco é obrigatório.',
+                'message' => 'O conteúdo do bloco não pode ficar vazio.',
             ]);
 
         $validator

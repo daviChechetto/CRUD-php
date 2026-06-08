@@ -33,8 +33,8 @@ class PagesController extends AppController
 			//     (
 			//       [0] => Array
 			//         (
-			//           [tipo] => "texto"
-			//           [conteudo] => Array
+			//           [type] => "texto"
+			//           [content] => Array
 			//             (
 			//               [texto] => "Conteúdo do bloco de texto"
 			//             )
@@ -43,8 +43,8 @@ class PagesController extends AppController
 			//         )
 			//       [1] => Array
 			//         (
-			//           [tipo] => "imagem"
-			//           [conteudo] => Array
+			//           [type] => "imagem"
+			//           [content] => Array
 			//         (
 			//           [file_path] => "imagem-pagina-20260605120000-abc12345.jpg"
 			//           [alt_text] => "Descrição da imagem"
@@ -69,14 +69,14 @@ class PagesController extends AppController
 				$bloco['user_id'] = 1;
 				$bloco['ativo'] = 1;
 
-				if ($bloco['tipo'] === 'imagem' || $bloco['tipo'] === 'banner') {
+				if ($bloco['type'] === 'imagem' || $bloco['type'] === 'banner') {
 					$arquivo = $bloco['uploaded_file'] ?? null;
 
 					if ($arquivo instanceof UploadedFileInterface && $arquivo->getError() === \UPLOAD_ERR_OK) {
 						if ($this->isValidImageUpload($arquivo)) {
 							$nomeDoArquivo = $this->storeUploadedImage($arquivo);
 
-							$bloco['conteudo'] = [
+							$bloco['content'] = [
 								'file_path' => $nomeDoArquivo,
 								'alt_text' => $bloco['alt_text'] ?? ''
 							];
@@ -88,8 +88,8 @@ class PagesController extends AppController
 					}
 				} else {
 					// Forçamos os blocos de texto a virarem Array para a coluna JSON
-					if (isset($bloco['conteudo']) && is_string($bloco['conteudo'])) {
-						$bloco['conteudo'] = ['texto' => $bloco['conteudo']];
+					if (isset($bloco['content']) && is_string($bloco['content'])) {
+						$bloco['content'] = ['texto' => $bloco['content']];
 					}
 				}
 
@@ -100,7 +100,7 @@ class PagesController extends AppController
 					unset($bloco['uploaded_file']);
 				}
 
-				// Limpamos também o alt_text solto, já que o guardamos para dentro de 'conteudo'
+				// Limpamos também o alt_text solto, já que o guardamos para dentro de 'content'
 				if (isset($bloco['alt_text'])) {
 					unset($bloco['alt_text']);
 				}

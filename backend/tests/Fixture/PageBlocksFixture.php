@@ -20,16 +20,15 @@ class PageBlocksFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'title' => 'Lorem ipsum dolor sit amet',
                 'page_id' => 1,
-                'tipo' => 'Lorem ipsum dolor sit amet',
-                'conteudo' => '',
+                'type' => 'Lorem ipsum dolor sit amet',
+                'content' => ['texto' => 'Lorem ipsum dolor sit amet'],
                 'sort_order' => 1,
                 'user_id' => 1,
                 'system_id' => 1,
                 'ativo' => 1,
-                'created' => '2026-05-29 13:34:59',
-                'modified' => '2026-05-29 13:34:59',
+                'created' => '2026-06-08 11:54:35',
+                'modified' => '2026-06-08 11:54:35',
                 'modified_by' => 1,
             ],
         ];

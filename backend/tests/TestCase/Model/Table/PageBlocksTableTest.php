@@ -61,7 +61,17 @@ class PageBlocksTableTest extends TestCase
      */
     public function testValidationDefault(): void
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $data = [
+            'page_id' => 1,
+            'type' => 'texto',
+            'content' => ['texto' => 'Conteúdo do bloco'],
+            'sort_order' => 1,
+            'user_id' => 1,
+            'ativo' => 1,
+        ];
+
+        $pageBlock = $this->PageBlocks->newEntity($data);
+        $this->assertEmpty($pageBlock->getErrors());
     }
 
     /**

@@ -9,10 +9,9 @@ use Cake\ORM\Entity;
  * PageBlock Entity
  *
  * @property int $id
- * @property string $title
  * @property int $page_id
- * @property string $tipo
- * @property array $conteudo
+ * @property string $type
+ * @property array $content
  * @property int $sort_order
  * @property int $user_id
  * @property int|null $system_id
@@ -36,10 +35,9 @@ class PageBlock extends Entity
      * @var array<string, bool>
      */
     protected array $_accessible = [
-        'title' => true,
         'page_id' => true,
-        'tipo' => true,
-        'conteudo' => true,
+        'type' => true,
+        'content' => true,
         'sort_order' => true,
         'user_id' => true,
         'system_id' => true,

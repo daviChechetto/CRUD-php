@@ -138,6 +138,7 @@ class PagesController extends AppController
 				'id' => $page->id,
 				'title' => $page->title,
 				'user_id' => $page->user_id,
+				'status' => $page->status,
 				'ativo' => $page->ativo,
 				'created' => $page->created->format('d/m/Y H:i'),
 				'modified' => $page->modified->format('d/m/Y H:i'),

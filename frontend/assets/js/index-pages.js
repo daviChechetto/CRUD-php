@@ -23,15 +23,14 @@ function formatarDataISO(dataIso) {
 }
 
 function obterStatusFormatado(status) {
-	if (status === true || status === 'Ativo' || status === 'ativo' || status === 'active') {
-		return { label: 'Ativo', classe: 'status-ativo' };
+	if (status === 'Aprovado') {
+		return { label: 'Aprovado', classe: 'status-aprovado' };
+	} else if (status === 'Aguardando') {
+		return { label: 'Aguardando', classe: 'status-aguardando' };
+	} else if (status === 'Publicado') {
+		return { label: 'Publicado', classe: 'status-publicado' };
 	}
-
-	if (status === 'rascunho' || status === 'Rascunho' || status === 'draft') {
-		return { label: 'Rascunho', classe: 'status-rascunho' };
-	}
-
-	return { label: 'Inativo', classe: 'status-inativo' };
+	return { label: 'Rascunho', classe: 'status-rascunho' };
 }
 
 function renderizartabelaPaginas() {
@@ -51,16 +50,18 @@ function renderizartabelaPaginas() {
 
 			// Roda o laço preenchendo a tabela
 			response.pagesList.forEach(function (pagina) {
+				statusPagina = obterStatusFormatado(pagina.status)
+
 				const linhaHTML = `
 						<ul class="tabela-linha">
 							<li><strong>${pagina.title}</strong></li>
 							<li>
-                                <span class="badge-status">
-                                    ${pagina.status}
+                                <span class="status-badge ${statusPagina.classe}">
+                                    ${statusPagina.label}
                                 </span>
                             </li>
 							<li>${pagina.modified}</li>
-							<li>${pagina.block_count} blocos</li>
+							<li>${pagina.blocks_count} blocos</li>
 						</ul>
 					`;
 				UI.$tabelaPaginasCorpo.append(linhaHTML);

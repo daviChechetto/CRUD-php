@@ -147,10 +147,9 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	min-width: 80px;
-	padding: 6px 10px;
+	padding: 4px 8px;
 	border-radius: 999px;
-	font-size: 0.9rem;
+	font-size: 0.625rem;
 	font-weight: 600;
 	text-transform: uppercase;
 	letter-spacing: 0.03em;
@@ -167,12 +166,21 @@
 }
 
 .status-rascunho {
-	background-color: #c9a933;
+	background-color: #171717;
 	color: white;
 }
 
-.empty-state {
-	padding: 24px 20px;
-	color: var(--cor-fonte-secundario);
-	text-align: center;
+.status-aprovado {
+	background-color: #013d58;
+	color: white;
+}
+
+.status-aguardando {
+	background-color: #353100;
+	color: white;
+}
+
+.status-publicado {
+	background-color: #0a3000;
+	color: white;
 }

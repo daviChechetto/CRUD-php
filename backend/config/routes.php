@@ -60,7 +60,7 @@ return function (RouteBuilder $routes): void {
         $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
         $builder->post('/pages/add', ['controller' => 'Pages', 'action' => 'add']);
-        $builder->post('/pages', ['controller' => 'Pages', 'action' => 'index']);
+        $builder->get('/pages', ['controller' => 'Pages', 'action' => 'index']);
 
         // Habilita que a nossa API responda no formato JSON
         $builder->setExtensions(['json']);

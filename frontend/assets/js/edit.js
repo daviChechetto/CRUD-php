@@ -114,7 +114,7 @@ UI.botaoCancelarEdicao.on('click', function () {
 	if (idUsuario) {
 		window.location.href = 'view.html?id=' + idUsuario;
 	} else {
-		window.location.href = 'index-users.html';
+		window.location.href = 'index.html';
 	}
 });
 

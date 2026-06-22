@@ -16,7 +16,7 @@ function deletarUsuario(userId) {
 		type: "DELETE",
 		success: function (response) {
 			console.log("usuário excluído com sucesso!", response);
-			window.location.href = 'index-users.html'; // Redireciona para a página de listagem após exclusão
+			window.location.href = 'index.html'; // Redireciona para a página de listagem após exclusão
 		},
 		error: function (error) {
 			alert("Ocorreu um erro ao excluir o usuário. Por favor, verifique o console.");

@@ -1,5 +1,4 @@
 const UI = {
-	$botaoCriarPagina: $('#botaoCriarPagina'),
 	$tabelaPaginasCorpo: $('#tabelaPaginasCorpo'),
 };
 
@@ -74,9 +73,5 @@ function renderizartabelaPaginas() {
 }
 
 $(document).ready(function () {
-	UI.$botaoCriarPagina.on('click', function () {
-		window.location.href = 'pages.html';
-	});
-
 	renderizartabelaPaginas();
 });

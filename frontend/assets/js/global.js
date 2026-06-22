@@ -45,9 +45,9 @@
 const CONFIG = {
 	apiUrl: 'http://localhost/crud/backend/',
 	navegacao: [
-		{ titulo: 'Usuários', href: 'index-users.html', icone: 'person' },
-		{ titulo: 'Páginas Add', href: 'pages.html', icone: 'add_notes' },
-		{ titulo: 'Páginas', href: 'index-pages.html', icone: 'auto_stories' },
+		{ titulo: 'Início', href: '/', icone: 'home' },
+		{ titulo: 'Páginas', href: '/paginas', icone: 'auto_stories' },
+		{ titulo: 'Usuários', href: '/lista-usuarios', icone: 'person' },
 	]
 }
 
@@ -87,14 +87,6 @@ function mostrarMensagem(texto, tipo) {
 $(document).ready(function () {
 	// Gera a navegação dinamicamente a partir do CONFIG
 	gerarNavegacao();
-
-	// Pega apenas o final da URL (ex: "index.html" ou "pages.html")
-	let paginaAtual = window.location.pathname.split("/").pop();
-
-	// Se a pessoa acessar só a pasta raiz (ex: localhost/crud/), assumimos que é o index
-	if (paginaAtual === '') {
-		paginaAtual = 'index-users.html';
-	}
 
 	// Percorre todos os links dentro da nossa navegação
 	$('.lista-navegacao a').each(function () {

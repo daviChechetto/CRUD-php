@@ -9,11 +9,14 @@
 	cursor: pointer;
 }
 
-#botaoCriarPagina {
+#linkCriarPagina {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	gap: 0px;
+	
+	font-size: 0.75rem;
+	text-decoration: none;
 
 	min-width: 45px;
 	width: max-content;
@@ -47,16 +50,19 @@
 	}
 
 	.text {
-		max-width: 0px;
-		width: max-content;
-		opacity: 0;
 		font-size: 1.2em;
 		font-weight: 500;
+		text-wrap-mode: nowrap;
+		opacity: 0;
+
+		max-width: 0px;
+		width: max-content;
 		transition: 250ms ease-in-out;
 		pointer-events: none;
 	}
 
 	&:hover {
+		padding-inline: 15px;
 		gap: 10px;
 
 		.text {

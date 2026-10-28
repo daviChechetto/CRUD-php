@@ -16,6 +16,7 @@ declare(strict_types=1);
  */
 namespace App;
 
+use App\Middleware\CorsMiddleware;
 use App\Middleware\HostHeaderMiddleware;
 use Cake\Core\Configure;
 use Cake\Core\ContainerInterface;
@@ -62,7 +63,22 @@ class Application extends BaseApplication
      */
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
+        // CSRF Protection com exceção para rotas de API JSON
+        $csrf = new CsrfProtectionMiddleware([
+            'httponly' => true,
+        ]);
+        $csrf->skipCheckCallback(function ($request) {
+            $path = $request->getUri()->getPath();
+
+            return str_ends_with($path, '.json') ||
+                str_contains($request->getHeaderLine('Accept'), 'application/json') ||
+                str_contains($request->getHeaderLine('Content-Type'), 'application/json');
+        });
+
         $middlewareQueue
+            // CORS Middleware para permitir requisições vindas do frontend (ex: porta 3000)
+            ->add(new CorsMiddleware())
+
             // Catch any exceptions in the lower layers,
             // and make an error page/response
             ->add(new ErrorHandlerMiddleware(Configure::read('Error'), $this))
@@ -90,9 +106,7 @@ class Application extends BaseApplication
 
             // Cross Site Request Forgery (CSRF) Protection Middleware
             // https://book.cakephp.org/5/en/security/csrf.html#cross-site-request-forgery-csrf-middleware
-            ->add(new CsrfProtectionMiddleware([
-                'httponly' => true,
-            ]));
+            ->add($csrf);
 
         return $middlewareQueue;
     }

@@ -7,7 +7,7 @@
 		linkAtalho: $('.link-atalho'),
 	}
 
-	UI.body.append(`<div id="perseguidor"><div class="circulo"></div></div>`)
+	UI.body.append(`<div id="perseguidor"><div class="circulo"></div></div>`);
 
 	$(window).on('mousemove', (e) => {
 		const mouseX = e.clientX;
@@ -16,18 +16,17 @@
 		$("#perseguidor").css({
 			'transform': `translate(${mouseX - 9}px, ${mouseY - 9}px)`
 		});
-	})
+	});
 
 	$("a, button").hover(function () {
-		$("#perseguidor").toggleClass('esconder')
-	})
+		$("#perseguidor").toggleClass('esconder');
+	});
 })();
 
 // A URL base da nossa API no backend
-
 const CONFIG = {
 	apiUrl: 'http://localhost/crud/backend/users'
-}
+};
 
 function obterParametroConsulta(parametro) {
 	const parametrosUrl = new URLSearchParams(window.location.search);
@@ -37,7 +36,7 @@ function obterParametroConsulta(parametro) {
 // tipo de mensagem: "sucesso" e "erro"
 function mostrarMensagem(texto, tipo) {
 	const mensagem = $('<div class="mensagem ' + tipo + '">' + texto + '</div>');
-	UI.body.prepend(mensagem);
+	$('body').prepend(mensagem);
 
 	setTimeout(function () {
 		mensagem.fadeOut(300, function () {
@@ -47,24 +46,27 @@ function mostrarMensagem(texto, tipo) {
 }
 
 $(document).ready(function() {
-    // Pega apenas o final da URL (ex: "index.html" ou "pages.html")
-    let paginaAtual = window.location.pathname.split("/").pop();
+    const pathname = window.location.pathname.replace(/\/+$/, '') || '/';
+    let paginaAtual = pathname.split('/').pop();
 
-    // Se a pessoa acessar só a pasta raiz (ex: localhost/crud/), assumimos que é o index
-    if (paginaAtual === '') {
-        paginaAtual = 'index.html';
+    if (!paginaAtual || paginaAtual === '') {
+        paginaAtual = 'paginas';
     }
 
-    // Percorre todos os links dentro da nossa navegação
+    // Percorre todos os links dentro da navegação
     $('.lista-navegacao a').each(function() {
         const linkHref = $(this).attr('href');
+        if (!linkHref) return;
 
-        // Se o href do botão bater com a URL da página atual...
-        if (linkHref === paginaAtual) {
-            // Removemos a classe de todos (por precaução)
+        const normalizado = linkHref.replace(/\/+$/, '') || '/';
+        const linkBase = normalizado.split('/').pop();
+
+        // Se o href do botão bater com a rota atual
+        if (pathname === normalizado || 
+            (paginaAtual && (paginaAtual === linkBase || 
+             (paginaAtual === 'lista-de-usuarios' && linkBase === 'index.html') ||
+             (paginaAtual === 'paginas' && linkBase === 'pages.html')))) {
             $('.lista-navegacao li').removeClass('link-selecionado');
-            
-            // E adicionamos a classe apenas no <li> "pai" deste link específico
             $(this).parent('li').addClass('link-selecionado');
         }
     });

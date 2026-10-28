@@ -16,7 +16,7 @@ function deletarUsuario(userId) {
 		type: "DELETE",
 		success: function (response) {
 			console.log("usuário excluído com sucesso!", response);
-			window.location.href = 'index.html'; // Redireciona para a página de listagem após exclusão
+			window.location.href = '/lista-de-usuarios'; // Redireciona para a página de listagem após exclusão
 		},
 		error: function (error) {
 			alert("Ocorreu um erro ao excluir o usuário. Por favor, verifique o console.");
@@ -65,7 +65,7 @@ function visualizarUsuario() {
 
 // Adicionar eventos aos botões
 UI.botaoEditarUsuario.on('click', function () {
-	window.location.href = `edit.html?id=${UI.userId.text()}`; // Redireciona para a página de edição com o ID do usuário
+	window.location.href = `/editar-usuario?id=${UI.userId.text()}`; // Redireciona para a página de edição com o ID do usuário
 });
 
 UI.botaoExcluirUsuario.on('click', function () {

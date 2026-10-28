@@ -30,7 +30,7 @@ body {
 	align-items: center;
 	height: 100%;
 
-	background-image: url('../assets/mirante.png');
+	background-image: url('/assets/images/mirante.png'), url('../images/mirante.png');
 	background-size: cover;
 	background-position: center;
 

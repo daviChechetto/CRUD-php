@@ -35,7 +35,7 @@ function atualizarUsuario(idUsuario, dados) {
 			console.log("usuário atualizado com sucesso!", resposta);
 			mostrarMensagem('Usuário atualizado com sucesso!', 'sucesso');
 			setTimeout(function () {
-				window.location.href = 'view.html?id=' + idUsuario;
+				window.location.href = '/visualizar-usuario?id=' + idUsuario;
 			}, 500);
 		},
 		error: function (erro) {
@@ -112,9 +112,9 @@ UI.formularioEdicao.on('submit', function (evento) {
 UI.botaoCancelarEdicao.on('click', function () {
 	const idUsuario = obterParametroConsulta('id');
 	if (idUsuario) {
-		window.location.href = 'view.html?id=' + idUsuario;
+		window.location.href = '/visualizar-usuario?id=' + idUsuario;
 	} else {
-		window.location.href = 'index.html';
+		window.location.href = '/lista-de-usuarios';
 	}
 });
 

@@ -6,7 +6,8 @@
         font-style: normal;
         font-weight: 400;
         /* font-display: swap; */
-        src: url('../fonts/MaterialSymbolsRounded.ttf') format('truetype');
+        src: url('/fonts/MaterialSymbolsRounded.ttf') format('truetype'),
+             url('../../fonts/MaterialSymbolsRounded.ttf') format('truetype');
 }
 .material-symbols-rounded {
         font-family: 'Material Symbols Rounded';

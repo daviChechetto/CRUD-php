@@ -22,7 +22,7 @@ function closeModal() {
 function refresh() {
 	$.get(CONFIG.apiUrl, function (data) {
 		UI.corpoTabela.empty().append(data.map(user => `
-			<a href="view.html?id=${user.id}" class="user-item">
+			<a href="/visualizar-usuario?id=${user.id}" class="user-item">
 				<div>${user.id}</div>
 				<div>${user.name}</div>
 				<div>${user.username}</div>

@@ -31,7 +31,7 @@ function userLogin(username, password) {
 				mostrarMensagem(response.message, response.status);
 				piscar();
 				setTimeout(function () {
-					window.location.href = "index.html";
+					window.location.href = "/lista-de-usuarios";
 				}, 1000);
 			} else {
 				mostrarMensagem(response.message, response.status);

@@ -125,9 +125,9 @@ Com o frontend e o backend em execução, abra no navegador:
 
 - **Menu de Páginas / Hub:** [http://localhost:3000/paginas](http://localhost:3000/paginas)
 - **Lista e Gerenciamento de Usuários:** [http://localhost:3000/lista-de-usuarios](http://localhost:3000/lista-de-usuarios)
-- **Tela de Login:** [http://localhost:3000/screens/users/login.html](http://localhost:3000/screens/users/login.html)
-- **Visualização de Usuário:** `http://localhost:3000/screens/users/view.html?id=1`
-- **Edição de Usuário:** `http://localhost:3000/screens/users/edit.html?id=1`
+- **Tela de Login:** [http://localhost:3000/login](http://localhost:3000/login)
+- **Visualização de Usuário:** `http://localhost:3000/visualizar-usuario?id=1`
+- **Edição de Usuário:** `http://localhost:3000/editar-usuario?id=1`
 
 ---
 

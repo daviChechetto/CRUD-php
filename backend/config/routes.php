@@ -65,8 +65,14 @@ return function (RouteBuilder $routes): void {
         // Habilita que a nossa API responda no formato JSON
         $builder->setExtensions(['json']);
 
+        // Rota de login
+        $builder->connect('/users/login', ['controller' => 'Users', 'action' => 'login']);
+
         // Cria automaticamente todas as rotas RESTful para os usuários
-        $builder->resources('Users');
+        $builder->resources('Users', [
+            'id' => '\d+'
+        ]);
+
         /*
          * Connect catchall routes for all controllers.
          *

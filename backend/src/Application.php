@@ -18,6 +18,7 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Middleware\CorsMiddleware;
 use App\Middleware\HostHeaderMiddleware;
 use Cake\Core\Configure;
 use Cake\Core\ContainerInterface;
@@ -64,25 +65,10 @@ class Application extends BaseApplication
      */
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
-        $middlewareQueue->add(function (\Cake\Http\ServerRequest $request, \Psr\Http\Server\RequestHandlerInterface $handler) {
-            // O navegador sempre envia um 'OPTIONS' invisível antes do POST para checar permissão
-            if ($request->getMethod() === 'OPTIONS') {
-                $response = new \Cake\Http\Response();
-                return $response
-                    ->withHeader('Access-Control-Allow-Origin', '*') // O '*' libera para qualquer porta (ex: 5500)
-                    ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
-                    ->withHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept');
-            }
-
-            // Continua a requisição normal (o seu POST) anexando o passe livre
-            $response = $handler->handle($request);
-            return $response
-                ->withHeader('Access-Control-Allow-Origin', '*')
-                ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
-                ->withHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept');
-        });
-        
         $middlewareQueue
+            // CORS Middleware para permitir requisições vindas do frontend (ex: porta 3000)
+            ->add(new CorsMiddleware())
+
             // Catch any exceptions in the lower layers,
             // and make an error page/response
             ->add(new ErrorHandlerMiddleware(Configure::read('Error'), $this))
@@ -108,11 +94,11 @@ class Application extends BaseApplication
             // https://book.cakephp.org/5/en/controllers/middleware.html#body-parser-middleware
             ->add(new BodyParserMiddleware());
 
-        // Cross Site Request Forgery (CSRF) Protection Middleware
-        // https://book.cakephp.org/5/en/security/csrf.html#cross-site-request-forgery-csrf-middleware
-        // ->add(new CsrfProtectionMiddleware([
-        //     'httponly' => true,
-        // ]));
+            // Cross Site Request Forgery (CSRF) Protection Middleware
+            // https://book.cakephp.org/5/en/security/csrf.html#cross-site-request-forgery-csrf-middleware
+            ->add(new CsrfProtectionMiddleware([
+                'httponly' => true,
+            ]));
 
         return $middlewareQueue;
     }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CakePHP specific files #
 ##########################
 /config/app_local.php
@@ -50,3 +51,6 @@ nbproject/*
 # yarn
 yarn-debug.log
 yarn-error.log
+=======
+node_modules/
+>>>>>>> feature/davi-pages

@@ -7,7 +7,11 @@
 		linkAtalho: $('.link-atalho'),
 	}
 
+<<<<<<< HEAD
 	UI.body.append(`<div id="perseguidor"><div class="circulo"></div></div>`)
+=======
+	UI.body.append(`<div id="perseguidor"><div class="circulo"></div></div>`);
+>>>>>>> feature/davi-pages
 
 	$(window).on('mousemove', (e) => {
 		const mouseX = e.clientX;
@@ -16,6 +20,7 @@
 		$("#perseguidor").css({
 			'transform': `translate(${mouseX - 9}px, ${mouseY - 9}px)`
 		});
+<<<<<<< HEAD
 	})
 
 	$("a, button, input").hover(function () {
@@ -37,10 +42,17 @@
 		if (e.which === 1) {
 			$("#perseguidor").removeClass('esconder');
 		}
+=======
+	});
+
+	$("a, button").hover(function () {
+		$("#perseguidor").toggleClass('esconder');
+>>>>>>> feature/davi-pages
 	});
 })();
 
 // A URL base da nossa API no backend
+<<<<<<< HEAD
 
 const CONFIG = {
 	apiUrl: 'http://localhost/crud/backend/',
@@ -50,12 +62,18 @@ const CONFIG = {
 		{ titulo: 'Usuários', href: '/lista-usuarios', icone: 'person' },
 	]
 }
+=======
+const CONFIG = {
+	apiUrl: 'http://localhost/crud/backend/users'
+};
+>>>>>>> feature/davi-pages
 
 function obterParametroConsulta(parametro) {
 	const parametrosUrl = new URLSearchParams(window.location.search);
 	return parametrosUrl.get(parametro);
 }
 
+<<<<<<< HEAD
 function gerarNavegacao() {
 	const listaNavegacao = $('.lista-navegacao');
 	
@@ -76,6 +94,12 @@ function gerarNavegacao() {
 function mostrarMensagem(texto, tipo) {
 	const mensagem = $('<div class="mensagem ' + tipo + '">' + texto + '</div>');
 	UI.body.prepend(mensagem);
+=======
+// tipo de mensagem: "sucesso" e "erro"
+function mostrarMensagem(texto, tipo) {
+	const mensagem = $('<div class="mensagem ' + tipo + '">' + texto + '</div>');
+	$('body').prepend(mensagem);
+>>>>>>> feature/davi-pages
 
 	setTimeout(function () {
 		mensagem.fadeOut(300, function () {
@@ -84,6 +108,7 @@ function mostrarMensagem(texto, tipo) {
 	}, 4000);
 }
 
+<<<<<<< HEAD
 $(document).ready(function () {
 	// Gera a navegação dinamicamente a partir do CONFIG
 	gerarNavegacao();
@@ -102,3 +127,31 @@ $(document).ready(function () {
 		}
 	});
 });
+=======
+$(document).ready(function() {
+    const pathname = window.location.pathname.replace(/\/+$/, '') || '/';
+    let paginaAtual = pathname.split('/').pop();
+
+    if (!paginaAtual || paginaAtual === '') {
+        paginaAtual = 'paginas';
+    }
+
+    // Percorre todos os links dentro da navegação
+    $('.lista-navegacao a').each(function() {
+        const linkHref = $(this).attr('href');
+        if (!linkHref) return;
+
+        const normalizado = linkHref.replace(/\/+$/, '') || '/';
+        const linkBase = normalizado.split('/').pop();
+
+        // Se o href do botão bater com a rota atual
+        if (pathname === normalizado || 
+            (paginaAtual && (paginaAtual === linkBase || 
+             (paginaAtual === 'lista-de-usuarios' && linkBase === 'index.html') ||
+             (paginaAtual === 'paginas' && linkBase === 'pages.html')))) {
+            $('.lista-navegacao li').removeClass('link-selecionado');
+            $(this).parent('li').addClass('link-selecionado');
+        }
+    });
+});
+>>>>>>> feature/davi-pages

@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "devDependencies": {
     "jquery-sortablejs": "^1.0.1"
   },
@@ -8,3 +9,21 @@
     "overlayscrollbars": "^2.16.0"
   }
 }
+=======
+  "name": "crud-frontend",
+  "version": "1.0.0",
+  "description": "Frontend da aplicação CRUD",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "jquery": "^3.7.1",
+    "jquery-sortablejs": "^1.0.2",
+    "overlayscrollbars": "^2.10.1",
+    "sortablejs": "^1.15.6"
+  }
+}
+
+>>>>>>> feature/davi-pages

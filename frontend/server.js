@@ -6,7 +6,7 @@ const port = 3000;
 // 1. ARQUIVOS ESTÁTICOS
 // Libera o carregamento de CSS, JS, Imagens, Fontes e Módulos
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
-app.use('/fonts', express.static(path.join(__dirname, 'fonts')));
+app.use('/fonts', express.static(path.join(__dirname, 'assets', 'fonts')));
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 
 // 2. ROTAS AMIGÁVEIS E COMPATIBILIDADE

@@ -21,7 +21,7 @@ function buscarUsuarioPorId(idUsuario) {
 		})
 		.fail(function () {
 			console.error('Erro ao carregar os dados da API');
-			mostrarMensagem('Erro ao carregar dados do usuário.', 'erro');
+			window.UtilitariosGlobais.mostrarMensagem('Erro ao carregar dados do usuário.', 'erro');
 		});
 }
 
@@ -33,14 +33,14 @@ function atualizarUsuario(idUsuario, dados) {
 		data: JSON.stringify(dados),
 		success: function (resposta) {
 			console.log("usuário atualizado com sucesso!", resposta);
-			mostrarMensagem('Usuário atualizado com sucesso!', 'sucesso');
+			window.UtilitariosGlobais.mostrarMensagem('Usuário atualizado com sucesso!', 'sucesso');
 			setTimeout(function () {
 				window.location.href = '/visualizar-usuario?id=' + idUsuario;
 			}, 500);
 		},
 		error: function (erro) {
 			console.error("Erro ao atualizar usuário:", erro.responseText);
-			mostrarMensagem('Erro ao atualizar usuário. Verifique o console.', 'erro');
+			window.UtilitariosGlobais.mostrarMensagem('Erro ao atualizar usuário. Verifique o console.', 'erro');
 		}
 	});
 }

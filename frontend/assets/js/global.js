@@ -22,6 +22,40 @@
 			return new URLSearchParams(window.location.search).get(parametro);
 		},
 
+		/**
+		 * Converte um texto ou nome em um slug amigável para URL.
+		 * Exemplo: "Davi Westphal" -> "davi-westphal"
+		 */
+		gerarSlug: (texto) => {
+			if (!texto) return '';
+			return texto
+				.toString()
+				.toLowerCase()
+				.normalize('NFD')
+				.replace(/[\u0300-\u036f]/g, '') // remove acentuação
+				.replace(/[^a-z0-9]+/g, '-')     // caracteres especiais viram hífen
+				.replace(/^-+|-+$/g, '');        // remove hífens das extremidades
+		},
+
+		/**
+		 * Obtém o identificador (slug ou ID) da URL.
+		 * Funciona tanto em rotas amigáveis (/visualizar-usuario/davi-westphal)
+		 * quanto em query params (?id=1 ou ?slug=...)
+		 */
+		obterIdentificadorUrl: () => {
+			const partes = window.location.pathname.split('/').filter(Boolean);
+			const ultimo = partes[partes.length - 1];
+			const rotasBase = ['visualizar-usuario', 'editar-usuario', 'view.html', 'edit.html'];
+
+			
+			if (ultimo && !rotasBase.includes(ultimo)) {
+				return decodeURIComponent(ultimo);
+			}
+
+			const params = new URLSearchParams(window.location.search);
+			return params.get('id') || params.get('user') || params.get('slug');
+		},
+
 		mostrarMensagem: (texto, tipo) => {
 			const mensagem = document.createElement('div');
 			mensagem.className = `mensagem ${tipo}`;
@@ -172,7 +206,7 @@
 						const primeiraLetra = dadosUsuario.name.charAt(0).toUpperCase();
 
 						UI.containerDoPerfil.innerHTML = `<div id="avatarLogado" class="avatar">${primeiraLetra}</div>`;
-						UI.containerDoPerfil.href = `/visualizar-usuario?id=${dadosUsuario.id}`;
+						UI.containerDoPerfil.attr('href', '/visualizar-usuario/' + dadosUsuario.slug);
 
 						// Fade In com Vanilla JS
 						UI.containerDoPerfil.style.opacity = '0';

@@ -12,43 +12,43 @@ app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 // 2. ROTAS AMIGÁVEIS E COMPATIBILIDADE
 
 // --- Rota Raiz (Home) ---
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'screens', 'home.html'));
+app.get('/', (requisicao, resposta) => {
+    resposta.sendFile(path.join(__dirname, 'screens', 'home.html'));
 });
 
 // --- Rotas de Páginas ---
-app.get(['/paginas', '/pages', '/pages.html'], (req, res) => {
-    res.sendFile(path.join(__dirname, 'screens', 'pages', 'index.html'));
+app.get(['/paginas', '/pages', '/pages.html'], (requisicao, resposta) => {
+    resposta.sendFile(path.join(__dirname, 'screens', 'pages', 'index.html'));
 });
 
-app.get(['/paginas/nova-pagina', '/nova-pagina'], (req, res) => {
-    res.sendFile(path.join(__dirname, 'screens', 'pages', 'add.html'));
+app.get(['/paginas/nova-pagina', '/nova-pagina'], (requisicao, resposta) => {
+    resposta.sendFile(path.join(__dirname, 'screens', 'pages', 'add.html'));
 });
 
-app.get(['/paginas/visualizar', '/visualizar-pagina'], (req, res) => {
-    res.sendFile(path.join(__dirname, 'screens', 'pages', 'view.html'));
+app.get(['/paginas/visualizar', '/visualizar-pagina'], (requisicao, resposta) => {
+    resposta.sendFile(path.join(__dirname, 'screens', 'pages', 'view.html'));
 });
 
 // --- Rotas de Usuários ---
-app.get(['/lista-de-usuarios', '/lista-usuarios', '/usuarios', '/users', '/index.html'], (req, res) => {
-    res.sendFile(path.join(__dirname, 'screens', 'users', 'index.html'));
+app.get(['/lista-de-usuarios'], (requisicao, resposta) => {
+    resposta.sendFile(path.join(__dirname, 'screens', 'users', 'index.html'));
 });
 
-app.get(['/visualizar-usuario', '/view.html'], (req, res) => {
-    res.sendFile(path.join(__dirname, 'screens', 'users', 'view.html'));
+app.get(['/visualizar-usuario/:slug_do_usuario'], (requisicao, resposta) => {
+    resposta.sendFile(path.join(__dirname, 'screens', 'users', 'view.html'));
 });
 
-app.get(['/editar-usuario', '/edit.html'], (req, res) => {
-    res.sendFile(path.join(__dirname, 'screens', 'users', 'edit.html'));
+app.get(['/editar-usuario/:slug_do_usuario'], (requisicao, resposta) => {
+    resposta.sendFile(path.join(__dirname, 'screens', 'users', 'edit.html'));
 });
 
-app.get(['/login', '/login.html'], (req, res) => {
-    res.sendFile(path.join(__dirname, 'screens', 'users', 'login.html'));
+app.get(['/login', '/login.html'], (requisicao, resposta) => {
+    resposta.sendFile(path.join(__dirname, 'screens', 'users', 'login.html'));
 });
 
 // 3. TRATAMENTO DE ERRO (Rota 404)
-app.use((req, res) => {
-    res.status(404).sendFile(path.join(__dirname, 'screens', '404.html'));
+app.use((requisicao, resposta) => {
+    resposta.status(404).sendFile(path.join(__dirname, 'screens', '404.html'));
 });
 
 // 4. LIGAR O SERVIDOR

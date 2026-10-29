@@ -70,7 +70,7 @@ function preencherFormulario(usuario) {
 }
 
 function carregarEdicaoUsuario() {
-	const idUsuario = obterParametroConsulta('id');
+	const idUsuario = window.UtilitariosGlobais.obterParametroConsulta('id');
 
 	if (!idUsuario) {
 		$('#detalhesUsuario').html('<p class="erro">Usuário não encontrado.</p>');
@@ -110,7 +110,7 @@ UI.formularioEdicao.on('submit', function (evento) {
 
 // Cancelar edição
 UI.botaoCancelarEdicao.on('click', function () {
-	const idUsuario = obterParametroConsulta('id');
+	const idUsuario = window.UtilitariosGlobais.obterParametroConsulta('id');
 	if (idUsuario) {
 		window.location.href = '/visualizar-usuario?id=' + idUsuario;
 	} else {

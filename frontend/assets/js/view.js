@@ -38,7 +38,7 @@ function buscarUsuario(userId) {
 }
 
 function visualizarUsuario() {
-	const userId = obterParametroConsulta('id');
+	const userId = window.UtilitariosGlobais.obterParametroConsulta('id');
 
 	if (!userId) {
 		$('#userDetails').html('<p class="erro">Usuário não encontrado.</p>');
@@ -70,7 +70,7 @@ UI.botaoEditarUsuario.on('click', function () {
 
 UI.botaoExcluirUsuario.on('click', function () {
 	if (confirm('Tem certeza que deseja excluir este usuário?')) {
-		const userId = obterParametroConsulta('id');
+		const userId = window.UtilitariosGlobais.obterParametroConsulta('id');
 		deletarUsuario(userId);
 	}
 });

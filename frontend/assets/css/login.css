@@ -32,11 +32,7 @@ body {
 	align-items: center;
 	height: 100%;
 
-<<<<<<< HEAD
-	background-image: url('../images/mirante.png');
-=======
 	background-image: url('/assets/images/mirante.png'), url('../images/mirante.png');
->>>>>>> feature/davi-pages
 	background-size: cover;
 	background-position: center;
 

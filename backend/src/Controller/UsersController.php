@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Utility\Text;
+
 /**
  * Users Controller
  *
@@ -27,7 +29,7 @@ class UsersController extends AppController
     {
         // Busca o usuário com o id especificado
         $user = $this->Users->get($id, [
-            'fields' => ['id', 'name', 'username', 'status'] // Não retornamos a senha por segurança
+            'fields' => ['id', 'name', 'slug', 'username', 'status'] // Não retornamos a senha por segurança
         ]);
 
         // Envia a variável para a camada de visualização
@@ -66,6 +68,10 @@ class UsersController extends AppController
         $user = $this->Users->get($id);
 
         $user = $this->Users->patchEntity($user, $this->request->getData());
+
+        if (!empty($user['name'])) {
+            $user['slug'] = strtolower(Text::slug($user['name']));
+        }
 
         if ($this->Users->save($user)) {
             $status = 'Usuário ' . $user->name . ' atualizado com sucesso!';

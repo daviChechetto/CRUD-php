@@ -206,7 +206,7 @@
 						const primeiraLetra = dadosUsuario.name.charAt(0).toUpperCase();
 
 						UI.containerDoPerfil.innerHTML = `<div id="avatarLogado" class="avatar">${primeiraLetra}</div>`;
-						UI.containerDoPerfil.href = '/visualizar-usuario/' + dadosUsuario.slug;
+						UI.containerDoPerfil.href = '/visualizar-usuario/' + (dadosUsuario.slug || dadosUsuario.id);
 
 						// Fade In com Vanilla JS
 						UI.containerDoPerfil.style.opacity = '0';

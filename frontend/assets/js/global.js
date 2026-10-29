@@ -83,7 +83,7 @@ function mostrarMensagem(texto, tipo) {
 	}, 4000);
 }
 
-$(document).ready(function () {
+$(function () {
 	// Gera a navegação dinamicamente a partir do CONFIG caso não exista
 	gerarNavegacao();
 

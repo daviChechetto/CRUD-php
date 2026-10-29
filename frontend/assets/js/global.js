@@ -12,6 +12,7 @@
 		body: document.body,
 		listaNavegacao: document.querySelector('.lista-navegacao'),
 		containerDoPerfil: document.getElementById('ligacaoPerfilUsuario'),
+		botaoLogout: $("#botaoLogout")
 	};
 
 	/**
@@ -181,6 +182,12 @@
 				}
 			});
 		};
+
+		UI.botaoLogout.on('click', function() {
+			localStorage.removeItem('usuarioLogado');
+
+			window.location.href = `/login`;
+		})
 
 		return {
 			inicializar: () => {

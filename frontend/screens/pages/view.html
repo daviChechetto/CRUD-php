@@ -10,8 +10,8 @@
 	<link rel="stylesheet" href="/assets/css/global.css">
 	<link rel="stylesheet" href="/assets/css/fonts.css">
 	<link rel="stylesheet" href="/assets/css/pages.css">
-    
-    <script src="/node_modules/jquery/dist/jquery.min.js" defer></script>
+
+	<script src="/node_modules/jquery/dist/jquery.min.js" defer></script>
 	<script src="/assets/js/global.js" defer></script>
 	<script src="/assets/js/pages-lista.js" defer></script>
 	<script src="/assets/js/pages-view.js" defer></script>
@@ -22,58 +22,60 @@
 		<label class="hamburger">
 			<input type="checkbox">
 			<svg viewBox="0 0 32 32">
-				<path class="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
+				<path class="line line-top-bottom"
+					d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22">
+				</path>
 				<path class="line" d="M7 16 27 16"></path>
 			</svg>
 		</label>
 		<nav>
-			<ul class="lista-navegacao">
-				<li>
-					<a href="index.html" class="link-atalho">
-						<span class="material-symbols-rounded">person</span>
-						<h3>Usuários</h3>
-					</a>
-				</li>
-				<li>
-					<a href="pages.html">
-						<span class="material-symbols-rounded">auto_stories</span>
-						<h3>Páginas</h3>
-					</a>
-				</li>
-			</ul>
+			<ul class="lista-navegacao"></ul>
 		</nav>
+		<button id="botaoLogout">
+			<span class="material-symbols-rounded">
+				&#xe9ba;
+			</span>
+		</button>
 		<a href="/perfil" id="ligacaoPerfilUsuario" class="container-usuario">
-        </a>
+		</a>
 	</aside>
 
 	<main class="container-listagem" style="padding: 40px; width: 100%;">
-		<section class="construtor-cabecalho" style="justify-content: space-between; margin-bottom: 30px; height: auto;">
+		<section class="construtor-cabecalho"
+			style="justify-content: space-between; margin-bottom: 30px; height: auto;">
 			<div>
 				<h2 style="font-size: 24px; color: var(--cor-fonte);">Páginas Institucionais</h2>
-				<p style="color: var(--cor-fonte-secundario); font-size: 14px; margin-top: 5px;">Gerencie o conteúdo dinâmico do portal</p>
+				<p style="color: var(--cor-fonte-secundario); font-size: 14px; margin-top: 5px;">Gerencie o conteúdo
+					dinâmico do portal</p>
 			</div>
-			
-			<a href="pages-add.html" class="animated-button" style="text-decoration: none; display: flex; align-items: center; justify-content: center; height: 46px;">
+
+			<a href="pages-add.html" class="animated-button"
+				style="text-decoration: none; display: flex; align-items: center; justify-content: center; height: 46px;">
 				<span class="material-symbols-rounded" style="font-size: 20px; margin-right: 5px;">add</span>
 				Nova Página
 			</a>
 		</section>
 
-		<div style="background: var(--card-color, #1a1a1a); border: 1px solid var(--cor-fundo-contraste, #333); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+		<div
+			style="background: var(--card-color, #1a1a1a); border: 1px solid var(--cor-fundo-contraste, #333); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
 			<table style="width: 100%; border-collapse: collapse; text-align: left; font-family: inherit;">
 				<thead>
-					<tr style="background: var(--cor-fundo-contraste, #252525); border-bottom: 2px solid #333; color: var(--cor-fonte);">
+					<tr
+						style="background: var(--cor-fundo-contraste, #252525); border-bottom: 2px solid #333; color: var(--cor-fonte);">
 						<th scope="col" style="padding: 18px 20px; font-weight: 600;">Título</th>
 						<th scope="col" style="padding: 18px 20px; font-weight: 600; width: 150px;">Status</th>
-						<th scope="col" style="padding: 18px 20px; font-weight: 600; width: 220px;">Última Modificação</th>
+						<th scope="col" style="padding: 18px 20px; font-weight: 600; width: 220px;">Última Modificação
+						</th>
 						<th scope="col" style="padding: 18px 20px; font-weight: 600; width: 180px;">Estrutura</th>
-						<th scope="col" style="padding: 18px 20px; font-weight: 600; width: 120px; text-align: center;">Ações</th>
+						<th scope="col" style="padding: 18px 20px; font-weight: 600; width: 120px; text-align: center;">
+							Ações</th>
 					</tr>
 				</thead>
 				<tbody id="tabelaPaginasBody">
 					<tr>
 						<td colspan="5" style="padding: 40px; text-align: center; color: var(--cor-fonte-secundario);">
-							<span class="material-symbols-rounded" style="animation: spin 1s linear infinite; vertical-align: middle; margin-right: 8px;">sync</span>
+							<span class="material-symbols-rounded"
+								style="animation: spin 1s linear infinite; vertical-align: middle; margin-right: 8px;">sync</span>
 							Buscando páginas cadastradas...
 						</td>
 					</tr>

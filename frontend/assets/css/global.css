@@ -1552,23 +1552,52 @@ h3 {
 		}
 	}
 
+	#botaoLogout {
+		position: relative;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+
+		width: 40px;
+		height: 40px;
+
+		color: white;
+
+		padding: 0;
+		border-radius: 50px;
+		border: none;
+
+		cursor: pointer;
+		overflow: hidden;
+		transition-duration: .3s;
+		box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+		background-color: var(--cor-fundo-contraste);
+		
+		&:hover {
+			background-color: rgb(255, 65, 65);
+			box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+		}
+	}
+
 	.container-usuario {
 		color: white;
 		text-decoration: none;
-		
+
 		.avatar {
 			display: flex;
 			align-items: center;
 			justify-content: center;
-	
+
 			width: 100%;
 			aspect-ratio: 1 / 1;
 			border-radius: 50%;
 			background: linear-gradient(135deg, #272727 0%, #501a2b 100%);
-	
+
 			color: white;
 			text-decoration: none;
-	
+
 			flex-shrink: 0;
 			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 		}

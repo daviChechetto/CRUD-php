@@ -30,6 +30,7 @@ class User extends Entity
      */
     protected array $_accessible = [
         'name' => true,
+        'slug' => true,
         'username' => true,
         'password' => true,
         'created' => true,

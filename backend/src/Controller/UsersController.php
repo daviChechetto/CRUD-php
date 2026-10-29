@@ -45,6 +45,10 @@ class UsersController extends AppController
         // Preenche essa entidade com os dados que vieram na requisição
         $user = $this->Users->patchEntity($user, $this->request->getData());
 
+        if (!empty($user['name'])) {
+            $user['slug'] = strtolower(Text::slug($user['name']));
+        }
+
         // Tenta salvar no banco de dados
         if ($this->Users->save($user)) {
             $status = 'sucesso';

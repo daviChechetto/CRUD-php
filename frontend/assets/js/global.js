@@ -218,17 +218,17 @@
 					if (dadosUsuario?.name) {
 						const primeiraLetra = dadosUsuario.name.charAt(0).toUpperCase();
 
-						UI.containerDoPerfil.innerHTML = `<div id="avatarLogado" class="avatar">${primeiraLetra}</div>`;
+						UI.containerDoPerfil.innerHTML = `<div id="avatarLogado" class="avatar">${primeiraLetra}</div><div id="nomeUsario" class="nome-usuario">${dadosUsuario.name}</div>`;
 						UI.containerDoPerfil.href = '/visualizar-usuario/' + (dadosUsuario.slug || dadosUsuario.id);
 
 						// Fade In com Vanilla JS
-						UI.containerDoPerfil.style.opacity = '0';
-						UI.containerDoPerfil.style.display = 'block';
+						// UI.containerDoPerfil.style.opacity = '0';
+						// UI.containerDoPerfil.style.display = 'block';
 
-						requestAnimationFrame(() => {
-							UI.containerDoPerfil.style.transition = 'opacity 0.4s ease';
-							UI.containerDoPerfil.style.opacity = '1';
-						});
+						// requestAnimationFrame(() => {
+						// 	UI.containerDoPerfil.style.transition = 'opacity 0.4s ease';
+						// 	UI.containerDoPerfil.style.opacity = '1';
+						// });
 					}
 				} catch (erro) {
 					console.error("Falha ao analisar dados do utilizador autenticado:", erro);

@@ -12,7 +12,9 @@
 		body: document.body,
 		listaNavegacao: document.querySelector('.lista-navegacao'),
 		containerDoPerfil: document.getElementById('ligacaoPerfilUsuario'),
-		botaoLogout: $("#botaoLogout")
+		botaoLogout: $("#botaoLogout"),
+		botaoExpandirNavegacao: $("#botaoExpandirNavegacao"),
+		navegacaoLateral: $("#navegacaoLateral"),
 	};
 
 	/**
@@ -110,11 +112,11 @@
 
 				// Delegação de Eventos: Verifica hovers interativos sem sobrecarregar a memória
 				document.addEventListener('mouseover', (e) => {
-					if (e.target.closest('a, button, input')) perseguidor.classList.add('esconder');
+					if (e.target.closest('a, button, input, label')) perseguidor.classList.add('esconder');
 				});
 
 				document.addEventListener('mouseout', (e) => {
-					if (e.target.closest('a, button, input')) perseguidor.classList.remove('esconder');
+					if (e.target.closest('a, button, input, label')) perseguidor.classList.remove('esconder');
 				});
 
 				// Eventos de clique
@@ -187,6 +189,10 @@
 			localStorage.removeItem('usuarioLogado');
 
 			window.location.href = `/login`;
+		})
+
+		UI.botaoExpandirNavegacao.on('click', function() {
+			UI.navegacaoLateral.toggleClass('expandir-menu');
 		})
 
 		return {

@@ -11,7 +11,7 @@
 	// Define as rotas que podem ser acedidas sem sessão iniciada
 	const rotasPublicas = ['/login', '/login.html'];
 	const caminhoAtual = window.location.pathname.replace(/\/+$/, '') || '/';
-	const sessaoAtiva = localStorage.getItem('usuarioLogado');
+	const sessaoAtiva = sessionStorage.getItem('usuarioLogado') || localStorage.getItem('usuarioLogado');
 
 	// Expulsa intrusos (Não tem sessão e tenta aceder a uma rota privada)
 	if (!sessaoAtiva && !rotasPublicas.includes(caminhoAtual)) {
@@ -201,9 +201,10 @@
 		};
 
 		UI.botaoLogout.on('click', function () {
+			// e.preventDefault();
 			localStorage.removeItem('usuarioLogado');
-
-			window.location.href = `/login`;
+			sessionStorage.removeItem('usuarioLogado');
+			window.location.href = '/login';
 		})
 
 		UI.botaoExpandirNavegacao.on('click', function () {
@@ -224,7 +225,8 @@
 	const Autenticacao = (() => {
 		return {
 			inicializar: () => {
-				const usuarioSalvo = localStorage.getItem('usuarioLogado');
+				const usuarioSalvo = sessionStorage.getItem('usuarioLogado') || localStorage.getItem('usuarioLogado');
+
 				if (!usuarioSalvo || !UI.containerDoPerfil) {
 					UI.containerDoPerfil.innerHTML = `<div id="avatarLogado" class="avatar">I</div><div id="nomeUsario" class="nome-usuario">Invasor</div>`;
 					UI.containerDoPerfil.href = '/login';

@@ -28,14 +28,23 @@ function userLogin(username, password) {
 		data: JSON.stringify(loginData),
 		success: function (response) {
 			if (response.status === 'sucesso') {
+
+				const manterLogado = $('#manterLogado').is(':checked');
+
+				const dadosUsuario = JSON.stringify(response.user);
+
 				// GUARDA OS DADOS REAIS DO UTILIZADOR NA MEMÓRIA DO NAVEGADOR
-                localStorage.setItem('usuarioLogado', JSON.stringify(response.user));
+                if (manterLogado) {
+                    localStorage.setItem('usuarioLogado', dadosUsuario);
+                } else {
+                    sessionStorage.setItem('usuarioLogado', dadosUsuario);
+                }
 
 				window.UtilitariosGlobais.mostrarMensagem(response.message, response.status);
 				piscar();
 
 				setTimeout(function () {
-					window.location.href = "/lista-de-usuarios";
+					window.location.href = "/";
 				}, 1000);
 			} else {
 				window.UtilitariosGlobais.mostrarMensagem(response.message || 'Erro ao realizar login.', response.status || 'erro');

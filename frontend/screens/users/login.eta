@@ -31,7 +31,7 @@
 			</div>
 			<div class="rodape-formulario">
 				<label class="gl-checkbox">
-					<input class="gl-checkbox__input" type="checkbox" />
+					<input id="manterLogado" class="gl-checkbox__input" type="checkbox" />
 					<span class="gl-checkbox__box">
 						<svg class="gl-checkbox__check" viewBox="0 0 24 24" fill="none" stroke="currentColor"
 							stroke-width="3">

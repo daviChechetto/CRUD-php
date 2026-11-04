@@ -210,7 +210,10 @@
 		return {
 			inicializar: () => {
 				const usuarioSalvo = localStorage.getItem('usuarioLogado');
-				if (!usuarioSalvo || !UI.containerDoPerfil) return;
+				if (!usuarioSalvo || !UI.containerDoPerfil) {
+					UI.containerDoPerfil.innerHTML = `<div id="avatarLogado" class="avatar">I</div><div id="nomeUsario" class="nome-usuario">Invasor</div>`;
+					UI.containerDoPerfil.href = '/login';
+				};
 
 				try {
 					const dadosUsuario = JSON.parse(usuarioSalvo);

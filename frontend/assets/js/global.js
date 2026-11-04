@@ -8,6 +8,21 @@
 		]
 	};
 
+	// Define as rotas que podem ser acedidas sem sessão iniciada
+	const rotasPublicas = ['/login', '/login.html'];
+	const caminhoAtual = window.location.pathname.replace(/\/+$/, '') || '/';
+	const sessaoAtiva = localStorage.getItem('usuarioLogado');
+
+	// Expulsa intrusos (Não tem sessão e tenta aceder a uma rota privada)
+	if (!sessaoAtiva && !rotasPublicas.includes(caminhoAtual)) {
+		window.location.href = '/login';
+	}
+
+	// Redireciona utilizadores já autenticados (Tem sessão e tenta aceder ao login)
+	if (sessaoAtiva && rotasPublicas.includes(caminhoAtual)) {
+		window.location.href = '/';
+	}
+
 	const UI = {
 		body: document.body,
 		listaNavegacao: document.querySelector('.lista-navegacao'),
@@ -50,7 +65,7 @@
 			const ultimo = partes[partes.length - 1];
 			const rotasBase = ['visualizar-usuario', 'editar-usuario', 'view.html', 'edit.html'];
 
-			
+
 			if (ultimo && !rotasBase.includes(ultimo)) {
 				return decodeURIComponent(ultimo);
 			}
@@ -185,13 +200,13 @@
 			});
 		};
 
-		UI.botaoLogout.on('click', function() {
+		UI.botaoLogout.on('click', function () {
 			localStorage.removeItem('usuarioLogado');
 
 			window.location.href = `/login`;
 		})
 
-		UI.botaoExpandirNavegacao.on('click', function() {
+		UI.botaoExpandirNavegacao.on('click', function () {
 			UI.navegacaoLateral.toggleClass('expandir-menu');
 		})
 

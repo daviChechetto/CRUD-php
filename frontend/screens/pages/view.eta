@@ -1,0 +1,44 @@
+<% layout('/layouts/base', { title: 'Gerenciador de Páginas', mainClass: 'container-listagem' }) %>
+
+<% block("styles", () => { %>
+    <link rel="stylesheet" href="/assets/css/pages.css">
+<% }) %>
+
+<% block("scripts", () => { %>
+    <script src="/assets/js/pages-lista.js" defer></script>
+    <script src="/assets/js/pages-view.js" defer></script>
+<% }) %>
+
+<section class="construtor-cabecalho" style="justify-content: space-between; margin-bottom: 30px; height: auto">
+	<div>
+		<h2 style="font-size: 24px; color: var(--cor-fonte)">Páginas Institucionais</h2>
+		<p style="color: var(--cor-fonte-secundario); font-size: 14px; margin-top: 5px">Gerencie o conteúdo dinâmico do portal</p>
+	</div>
+
+	<a href="/paginas/nova-pagina" class="animated-button" style="text-decoration: none; display: flex; align-items: center; justify-content: center; height: 46px">
+		<span class="material-symbols-rounded" style="font-size: 20px; margin-right: 5px">add</span>
+		Nova Página
+	</a>
+</section>
+
+<div style="background: var(--card-color, #1a1a1a); border: 1px solid var(--cor-fundo-contraste, #333); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15)">
+	<table style="width: 100%; border-collapse: collapse; text-align: left; font-family: inherit">
+		<thead>
+			<tr style="background: var(--cor-fundo-contraste, #252525); border-bottom: 2px solid #333; color: var(--cor-fonte)">
+				<th scope="col" style="padding: 18px 20px; font-weight: 600">Título</th>
+				<th scope="col" style="padding: 18px 20px; font-weight: 600; width: 150px">Status</th>
+				<th scope="col" style="padding: 18px 20px; font-weight: 600; width: 220px">Última Modificação</th>
+				<th scope="col" style="padding: 18px 20px; font-weight: 600; width: 180px">Estrutura</th>
+				<th scope="col" style="padding: 18px 20px; font-weight: 600; width: 120px; text-align: center">Ações</th>
+			</tr>
+		</thead>
+		<tbody id="tabelaPaginasBody">
+			<tr>
+				<td colspan="5" style="padding: 40px; text-align: center; color: var(--cor-fonte-secundario)">
+					<span class="material-symbols-rounded" style="animation: spin 1s linear infinite; vertical-align: middle; margin-right: 8px">sync</span>
+					Buscando páginas cadastradas...
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

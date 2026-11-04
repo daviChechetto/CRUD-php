@@ -1,0 +1,134 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Controller;
+
+use Cake\Utility\Text;
+
+/**
+ * Users Controller
+ *
+ * @property \App\Model\Table\UsersTable $Users
+ */
+class UsersController extends AppController
+{
+    public function index()
+    {
+        // Busca todos os usuários no banco de dados
+        $users = $this->Users->find('all');
+
+        // Envia a variável para a camada de visualização
+        $this->set(compact('users'));
+
+        // Diz ao CakePHP para transformar a variável 'users' em JSON
+        $this->viewBuilder()->setClassName('Json');
+        $this->viewBuilder()->setOption('serialize', 'users');
+    }
+    public function view($id = null)
+    {
+        // Busca o usuário com o id especificado
+        $user = $this->Users->get($id, [
+            'fields' => ['id', 'name', 'slug', 'username', 'status'] // Não retornamos a senha por segurança
+        ]);
+
+        // Envia a variável para a camada de visualização
+        $this->set(compact('user'));
+
+        // Diz ao CakePHP para transformar a variável 'user' em JSON
+        $this->viewBuilder()->setClassName('Json');
+        $this->viewBuilder()->setOption('serialize', 'user');
+    }
+    public function add()
+    {
+        // Cria uma entidade vazia (representa uma nova linha no banco)
+        $user = $this->Users->newEmptyEntity();
+
+        // Preenche essa entidade com os dados que vieram na requisição
+        $user = $this->Users->patchEntity($user, $this->request->getData());
+
+        if (!empty($user['name'])) {
+            $user['slug'] = strtolower(Text::slug($user['name']));
+        }
+
+        // Tenta salvar no banco de dados
+        if ($this->Users->save($user)) {
+            $status = 'sucesso';
+        } else {
+            $status = 'erro ao salvar usuário ' . $user->name;
+        }
+
+        // Prepara a resposta em JSON
+        $this->set(compact('user', 'status'));
+        $this->viewBuilder()->setClassName('Json');
+        $this->viewBuilder()->setOption('serialize', ['user', 'status']);
+    }
+    public function edit($id = null)
+    {
+        $user = $this->Users->get($id);
+
+        $user = $this->Users->patchEntity($user, $this->request->getData());
+
+        if (!empty($user['name'])) {
+            $user['slug'] = strtolower(Text::slug($user['name']));
+        }
+
+        if ($this->Users->save($user)) {
+            $status = 'Usuário ' . $user->name . ' atualizado com sucesso!';
+        } else {
+            $status = 'erro ao atualizar usuário ' . $user->name;
+        }
+
+        // Prepara a resposta em JSON
+        $this->set(compact('user', 'status'));
+        $this->viewBuilder()->setClassName('Json');
+        $this->viewBuilder()->setOption('serialize', ['user', 'status']);
+    }
+    public function delete($id = null)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+
+        $user = $this->Users->get($id);
+
+        if ($this->Users->delete($user)) {
+            $status = 'Usuário ' . $user->name . ' deletado com sucesso!';
+        } else {
+            $status = 'erro ao deletar usuário ' . $user->name;
+        }
+
+        // Prepara a resposta em JSON
+        $this->set(compact('status'));
+        $this->viewBuilder()->setClassName('Json');
+        $this->viewBuilder()->setOption('serialize', 'status');
+    }
+    public function login($id = null)
+    {
+        // Apenas aceita requeisições do tipo POST
+        $this->request->allowMethod(['post']);
+
+        $data = $this->request->getData();
+        $user = $this->Users->find()
+            ->where([
+                'username' => $data['username'],
+                'password' => $data['password']
+            ])
+            ->first();
+
+
+        if ($user && $user->status == 1) {
+            $status = 'sucesso';
+            $message = 'Credências reconhecidas! Sucesso ao tentar entrar.';
+        } elseif ($user && $user->status == 0) {
+            $status = 'erro';
+            $message = 'Credências negadas! O seu usuário teve a conta desativada.';
+        } else {
+            $status = 'erro';
+            $message = 'Credências negadas! E-mail ou senha incorretos';
+        }
+
+        // Empacotamento da resposta em JSON
+        $this->set(compact('status', 'message', 'user'));
+        $this->viewBuilder()->setClassName('Json');
+        $this->viewBuilder()->setOption('serialize', ['status', 'message', 'user']);
+    }
+}

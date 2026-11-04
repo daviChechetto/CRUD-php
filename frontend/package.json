@@ -7,6 +7,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "eta": "^4.6.0",
     "express": "^5.2.1",
     "jquery": "^3.7.1",
     "jquery-sortablejs": "^1.0.2",

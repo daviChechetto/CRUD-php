@@ -1,0 +1,7 @@
+<% layout('/layouts/base', { title: 'Início - Painel de Controle' }) %>
+
+<!-- Tudo o que for digitado aqui o Eta jogará dentro do <%~ it.body %> do layout base -->
+<section class="boas-vindas">
+    <h1>Bem-vindo ao Painel de Controle</h1>
+    <p>Selecione uma opção no menu lateral para começar.</p>
+</section>

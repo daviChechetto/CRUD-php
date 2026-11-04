@@ -22,26 +22,39 @@ function userLogin(username, password) {
 	};
 
 	$.ajax({
-		url: CONFIG.apiUrl + 'users/login.json',
+		url: window.CONFIG.apiUrl + 'users/login.json',
 		type: 'POST',
 		contentType: 'application/json',
 		data: JSON.stringify(loginData),
 		success: function (response) {
 			if (response.status === 'sucesso') {
-				mostrarMensagem(response.message, response.status);
+
+				const manterLogado = $('#manterLogado').is(':checked');
+
+				const dadosUsuario = JSON.stringify(response.user);
+
+				// GUARDA OS DADOS REAIS DO UTILIZADOR NA MEMÓRIA DO NAVEGADOR
+                if (manterLogado) {
+                    localStorage.setItem('usuarioLogado', dadosUsuario);
+                } else {
+                    sessionStorage.setItem('usuarioLogado', dadosUsuario);
+                }
+
+				window.UtilitariosGlobais.mostrarMensagem(response.message, response.status);
 				piscar();
+
 				setTimeout(function () {
-					window.location.href = "/lista-de-usuarios";
+					window.location.href = "/";
 				}, 1000);
 			} else {
-				mostrarMensagem(response.message || 'Erro ao realizar login.', response.status || 'erro');
+				window.UtilitariosGlobais.mostrarMensagem(response.message || 'Erro ao realizar login.', response.status || 'erro');
 			}
 		},
 		error: function (xhr) {
 			const msg = (xhr.responseJSON && xhr.responseJSON.message)
 				? xhr.responseJSON.message
 				: 'Falha ao autenticar. Verifique o console ou a conexão com o servidor.';
-			mostrarMensagem(msg, 'erro');
+			window.UtilitariosGlobais.mostrarMensagem(msg, 'erro');
 		}
 	});
 }

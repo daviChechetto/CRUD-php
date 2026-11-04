@@ -12,16 +12,20 @@ const UI = {
 	
 	botaoVoltar: $(".botao-voltar"),
 	botaoCancelarEdicao: $("#botaoCancelarEdicao"),
-}
+};
 
-function buscarUsuarioPorId(idUsuario) {
+function buscarUsuarioPorIdentificador(identificador) {
 	return $.get(CONFIG.apiUrl + 'users/')
 		.then(function (dados) {
-			return dados.find(u => u.id == idUsuario);
+			return dados.find(u => 
+				String(u.id) === String(identificador) ||
+				window.UtilitariosGlobais.gerarSlug(u.name) === identificador ||
+				window.UtilitariosGlobais.gerarSlug(u.username) === identificador
+			);
 		})
 		.fail(function () {
 			console.error('Erro ao carregar os dados da API');
-			mostrarMensagem('Erro ao carregar dados do usuário.', 'erro');
+			window.UtilitariosGlobais.mostrarMensagem('Erro ao carregar dados do usuário.', 'erro');
 		});
 }
 
@@ -33,14 +37,15 @@ function atualizarUsuario(idUsuario, dados) {
 		data: JSON.stringify(dados),
 		success: function (resposta) {
 			console.log("usuário atualizado com sucesso!", resposta);
-			mostrarMensagem('Usuário atualizado com sucesso!', 'sucesso');
+			window.UtilitariosGlobais.mostrarMensagem('Usuário atualizado com sucesso!', 'sucesso');
+			const slug = window.UtilitariosGlobais.gerarSlug(dados.name) || idUsuario;
 			setTimeout(function () {
-				window.location.href = '/visualizar-usuario?id=' + idUsuario;
+				window.location.href = '/visualizar-usuario/' + slug;
 			}, 500);
 		},
 		error: function (erro) {
 			console.error("Erro ao atualizar usuário:", erro.responseText);
-			mostrarMensagem('Erro ao atualizar usuário. Verifique o console.', 'erro');
+			window.UtilitariosGlobais.mostrarMensagem('Erro ao atualizar usuário. Verifique o console.', 'erro');
 		}
 	});
 }
@@ -70,14 +75,14 @@ function preencherFormulario(usuario) {
 }
 
 function carregarEdicaoUsuario() {
-	const idUsuario = obterParametroConsulta('id');
+	const identificador = window.UtilitariosGlobais.obterIdentificadorUrl();
 
-	if (!idUsuario) {
+	if (!identificador) {
 		$('#detalhesUsuario').html('<p class="erro">Usuário não encontrado.</p>');
 		return;
 	}
 
-	buscarUsuarioPorId(idUsuario).then(function (usuario) {
+	buscarUsuarioPorIdentificador(identificador).then(function (usuario) {
 		preencherFormulario(usuario);
 	});
 }
@@ -110,9 +115,9 @@ UI.formularioEdicao.on('submit', function (evento) {
 
 // Cancelar edição
 UI.botaoCancelarEdicao.on('click', function () {
-	const idUsuario = obterParametroConsulta('id');
-	if (idUsuario) {
-		window.location.href = '/visualizar-usuario?id=' + idUsuario;
+	const identificador = window.UtilitariosGlobais.obterIdentificadorUrl();
+	if (identificador) {
+		window.location.href = '/visualizar-usuario/' + identificador;
 	} else {
 		window.location.href = '/lista-de-usuarios';
 	}

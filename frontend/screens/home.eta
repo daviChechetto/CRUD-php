@@ -1,23 +1,7 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<% layout('/layouts/base', { title: 'Início - Painel de Controle' }) %>
 
-<head>
-	<meta charset="UTF-8">
-	<title>CRUD de Usuários</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" href="/assets/css/global.css">
-	<link rel="stylesheet" href="/assets/css/fonts.css">
-
-	<script src="/node_modules/jquery/dist/jquery.min.js" defer></script>
-	<script src="/assets/js/global.js" defer></script>
-</head>
-
-<body>
-	<%~ include('./partials/aside') %>
-	<main>
-	</main>
-</body>
-
-</html>
+<!-- Tudo o que for digitado aqui o Eta jogará dentro do <%~ it.body %> do layout base -->
+<section class="boas-vindas">
+    <h1>Bem-vindo ao Painel de Controle</h1>
+    <p>Selecione uma opção no menu lateral para começar.</p>
+</section>

@@ -19,7 +19,6 @@ app.engine('eta', (filePath, options, callback) => {
         return callback(erro);
     }
 });
-
 app.set('view engine', 'eta');
 app.set('views', path.join(__dirname, 'screens'));
 
@@ -33,12 +32,12 @@ app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 
 // --- Rota Raiz (Home) ---
 app.get('/', (requisicao, resposta) => {
-    resposta.render('home');
+    resposta.render('home', { title: 'Início - Painel de Controle' });
 });
 
 // --- Rotas de Páginas ---
 app.get(['/paginas', '/pages', '/pages.html'], (requisicao, resposta) => {
-    resposta.render('pages/index');
+    resposta.render('pages/index', { title: 'Listagem de Páginas' });
 });
 
 app.get(['/paginas/nova-pagina', '/nova-pagina'], (requisicao, resposta) => {
